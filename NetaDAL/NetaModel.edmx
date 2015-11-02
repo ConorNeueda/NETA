@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NetaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="average_performance_broadband">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="county_id_fk" Type="int" />
+          <Property Name="Average Speed mbps" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="Average Pass of 5 GCSES" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="counties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="county" Type="char" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="library_board_performance_NI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="library_board" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="percent_7_pass_grades" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_5_pass_grades" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_7_pass_grades_non_grammar" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_5_pass_grades_non_grammar" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="local_authority_data">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="local_authority" Type="char" MaxLength="26" Nullable="false" />
+          <Property Name="postcode_area" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="percentage_not_receiving_2mbs" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="average_sync_speed_mBits" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="superfast_broadband_availability" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="population">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="authority" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="style" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="population_size" Type="bigint" />
+        </EntityType>
+        <EntityType Name="postcode_speed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="postcode" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="average_speed_mbps" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="median_speed_mbps" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="max_speed_mbps" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="lines_less_than_2mbps" Type="char" MaxLength="1" />
+          <Property Name="latitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="county_id_fk" Type="int" />
+        </EntityType>
+        <EntityType Name="school_performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="school_name" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="town" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="postcode" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="percent_5_pass_grades_gcse" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_7_pass_grades_maths_english" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_entitled_free_meals" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="county_id_fk" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'NetaDB.dbo.average_speed_pass_5_gcses_county' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="average_speed_pass_5_gcses_county">
+          <Property Name="county_id_fk" Type="int" />
+          <Property Name="Average Speed mbps" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="Average Pass of 5 GCSES" Type="decimal" Precision="38" Scale="6" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_passrates_by_broadband">
+          <Key>
+            <PropertyRef Name="postcode" />
+            <PropertyRef Name="percent_5_pass_grades_gcse" />
+            <PropertyRef Name="school_name" />
+          </Key>
+          <Property Name="postcode" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="average_speed_mbps" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="percent_5_pass_grades_gcse" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="school_name" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__postcode___count__21B6055D">
+          <End Role="counties" Type="Self.counties" Multiplicity="0..1" />
+          <End Role="postcode_speed" Type="Self.postcode_speed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="counties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postcode_speed">
+              <PropertyRef Name="county_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__school_pe__count__2A4B4B5E">
+          <End Role="counties" Type="Self.counties" Multiplicity="0..1" />
+          <End Role="school_performance" Type="Self.school_performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="counties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="school_performance">
+              <PropertyRef Name="county_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NetaDBModelStoreContainer">
+          <EntitySet Name="average_performance_broadband" EntityType="Self.average_performance_broadband" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="counties" EntityType="Self.counties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="library_board_performance_NI" EntityType="Self.library_board_performance_NI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="local_authority_data" EntityType="Self.local_authority_data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="population" EntityType="Self.population" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="postcode_speed" EntityType="Self.postcode_speed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="school_performance" EntityType="Self.school_performance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_passrates_by_broadband" EntityType="Self.view_passrates_by_broadband" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_passrates_by_broadband].[postcode] AS [postcode], 
+    [view_passrates_by_broadband].[average_speed_mbps] AS [average_speed_mbps], 
+    [view_passrates_by_broadband].[percent_5_pass_grades_gcse] AS [percent_5_pass_grades_gcse], 
+    [view_passrates_by_broadband].[school_name] AS [school_name]
+    FROM [dbo].[view_passrates_by_broadband] AS [view_passrates_by_broadband]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__postcode___count__21B6055D" Association="Self.FK__postcode___count__21B6055D">
+            <End Role="counties" EntitySet="counties" />
+            <End Role="postcode_speed" EntitySet="postcode_speed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__school_pe__count__2A4B4B5E" Association="Self.FK__school_pe__count__2A4B4B5E">
+            <End Role="counties" EntitySet="counties" />
+            <End Role="school_performance" EntitySet="school_performance" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NetaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="county">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="county1" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="postcode_speed" Relationship="Self.FK__postcode___count__21B6055D" FromRole="counties" ToRole="postcode_speed" />
+          <NavigationProperty Name="school_performance" Relationship="Self.FK__school_pe__count__2A4B4B5E" FromRole="counties" ToRole="school_performance" />
+        </EntityType>
+        <EntityType Name="library_board_performance_NI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="library_board" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="percent_7_pass_grades" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_5_pass_grades" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_7_pass_grades_non_grammar" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_5_pass_grades_non_grammar" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="local_authority_data">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="local_authority" Type="String" MaxLength="26" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="postcode_area" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="percentage_not_receiving_2mbs" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="average_sync_speed_mBits" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="superfast_broadband_availability" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="population">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="authority" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="style" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="population_size" Type="Int64" />
+        </EntityType>
+        <EntityType Name="postcode_speed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="postcode" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="average_speed_mbps" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="median_speed_mbps" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="max_speed_mbps" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="lines_less_than_2mbps" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="county_id_fk" Type="Int32" />
+          <NavigationProperty Name="county" Relationship="Self.FK__postcode___count__21B6055D" FromRole="postcode_speed" ToRole="counties" />
+        </EntityType>
+        <EntityType Name="school_performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="school_name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="town" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="postcode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="percent_5_pass_grades_gcse" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_7_pass_grades_maths_english" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="percent_entitled_free_meals" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="county_id_fk" Type="Int32" />
+          <NavigationProperty Name="county" Relationship="Self.FK__school_pe__count__2A4B4B5E" FromRole="school_performance" ToRole="counties" />
+        </EntityType>
+        <Association Name="FK__postcode___count__21B6055D">
+          <End Role="counties" Type="Self.county" Multiplicity="0..1" />
+          <End Role="postcode_speed" Type="Self.postcode_speed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="counties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postcode_speed">
+              <PropertyRef Name="county_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__school_pe__count__2A4B4B5E">
+          <End Role="counties" Type="Self.county" Multiplicity="0..1" />
+          <End Role="school_performance" Type="Self.school_performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="counties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="school_performance">
+              <PropertyRef Name="county_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NetaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="counties" EntityType="Self.county" />
+          <EntitySet Name="library_board_performance_NI" EntityType="Self.library_board_performance_NI" />
+          <EntitySet Name="local_authority_data" EntityType="Self.local_authority_data" />
+          <EntitySet Name="populations" EntityType="Self.population" />
+          <EntitySet Name="postcode_speed" EntityType="Self.postcode_speed" />
+          <EntitySet Name="school_performance" EntityType="Self.school_performance" />
+          <AssociationSet Name="FK__postcode___count__21B6055D" Association="Self.FK__postcode___count__21B6055D">
+            <End Role="counties" EntitySet="counties" />
+            <End Role="postcode_speed" EntitySet="postcode_speed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__school_pe__count__2A4B4B5E" Association="Self.FK__school_pe__count__2A4B4B5E">
+            <End Role="counties" EntitySet="counties" />
+            <End Role="school_performance" EntitySet="school_performance" />
+          </AssociationSet>
+          <EntitySet Name="view_passrates_by_broadband" EntityType="NetaDBModel.view_passrates_by_broadband" />
+          <EntitySet Name="average_performance_broadband" EntityType="NetaDBModel.average_performance_broadband" />
+        </EntityContainer>
+        <EntityType Name="view_passrates_by_broadband">
+          <Key>
+            <PropertyRef Name="postcode" />
+            <PropertyRef Name="percent_5_pass_grades_gcse" />
+            <PropertyRef Name="school_name" />
+          </Key>
+          <Property Name="postcode" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="average_speed_mbps" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="percent_5_pass_grades_gcse" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="school_name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="average_performance_broadband">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="county_id_fk" Type="Int32" />
+          <Property Name="Average_Speed_mbps" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Average_Pass_of_5_GCSES" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NetaDBModelStoreContainer" CdmEntityContainer="NetaDBEntities">
+          <EntitySetMapping Name="counties">
+            <EntityTypeMapping TypeName="NetaDBModel.county">
+              <MappingFragment StoreEntitySet="counties">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="county1" ColumnName="county" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="library_board_performance_NI">
+            <EntityTypeMapping TypeName="NetaDBModel.library_board_performance_NI">
+              <MappingFragment StoreEntitySet="library_board_performance_NI">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="library_board" ColumnName="library_board" />
+                <ScalarProperty Name="percent_7_pass_grades" ColumnName="percent_7_pass_grades" />
+                <ScalarProperty Name="percent_5_pass_grades" ColumnName="percent_5_pass_grades" />
+                <ScalarProperty Name="percent_7_pass_grades_non_grammar" ColumnName="percent_7_pass_grades_non_grammar" />
+                <ScalarProperty Name="percent_5_pass_grades_non_grammar" ColumnName="percent_5_pass_grades_non_grammar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="local_authority_data">
+            <EntityTypeMapping TypeName="NetaDBModel.local_authority_data">
+              <MappingFragment StoreEntitySet="local_authority_data">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="local_authority" ColumnName="local_authority" />
+                <ScalarProperty Name="postcode_area" ColumnName="postcode_area" />
+                <ScalarProperty Name="percentage_not_receiving_2mbs" ColumnName="percentage_not_receiving_2mbs" />
+                <ScalarProperty Name="average_sync_speed_mBits" ColumnName="average_sync_speed_mBits" />
+                <ScalarProperty Name="superfast_broadband_availability" ColumnName="superfast_broadband_availability" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="populations">
+            <EntityTypeMapping TypeName="NetaDBModel.population">
+              <MappingFragment StoreEntitySet="population">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="authority" ColumnName="authority" />
+                <ScalarProperty Name="style" ColumnName="style" />
+                <ScalarProperty Name="population_size" ColumnName="population_size" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postcode_speed">
+            <EntityTypeMapping TypeName="NetaDBModel.postcode_speed">
+              <MappingFragment StoreEntitySet="postcode_speed">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+                <ScalarProperty Name="average_speed_mbps" ColumnName="average_speed_mbps" />
+                <ScalarProperty Name="median_speed_mbps" ColumnName="median_speed_mbps" />
+                <ScalarProperty Name="max_speed_mbps" ColumnName="max_speed_mbps" />
+                <ScalarProperty Name="lines_less_than_2mbps" ColumnName="lines_less_than_2mbps" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="county_id_fk" ColumnName="county_id_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="school_performance">
+            <EntityTypeMapping TypeName="NetaDBModel.school_performance">
+              <MappingFragment StoreEntitySet="school_performance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="school_name" ColumnName="school_name" />
+                <ScalarProperty Name="town" ColumnName="town" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+                <ScalarProperty Name="percent_5_pass_grades_gcse" ColumnName="percent_5_pass_grades_gcse" />
+                <ScalarProperty Name="percent_7_pass_grades_maths_english" ColumnName="percent_7_pass_grades_maths_english" />
+                <ScalarProperty Name="percent_entitled_free_meals" ColumnName="percent_entitled_free_meals" />
+                <ScalarProperty Name="county_id_fk" ColumnName="county_id_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_passrates_by_broadband">
+            <EntityTypeMapping TypeName="NetaDBModel.view_passrates_by_broadband">
+              <MappingFragment StoreEntitySet="view_passrates_by_broadband">
+                <ScalarProperty Name="school_name" ColumnName="school_name" />
+                <ScalarProperty Name="percent_5_pass_grades_gcse" ColumnName="percent_5_pass_grades_gcse" />
+                <ScalarProperty Name="average_speed_mbps" ColumnName="average_speed_mbps" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="average_performance_broadband">
+            <EntityTypeMapping TypeName="NetaDBModel.average_performance_broadband">
+              <MappingFragment StoreEntitySet="average_performance_broadband">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Average_Pass_of_5_GCSES" ColumnName="Average Pass of 5 GCSES" />
+                <ScalarProperty Name="Average_Speed_mbps" ColumnName="Average Speed mbps" />
+                <ScalarProperty Name="county_id_fk" ColumnName="county_id_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

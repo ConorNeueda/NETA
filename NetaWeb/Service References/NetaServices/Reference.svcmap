@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9b2cdd3f-de7b-4c9d-82fa-52a9320304f9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:65118/NetaServices.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="NetaServices.disco" MetadataType="Disco" ID="65e40e39-6b53-4adc-8070-8ab79f16b239" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?disco" />
+    <MetadataFile FileName="NetaServices.wsdl" MetadataType="Wsdl" ID="e188e356-a569-445a-bf5d-0fdf7de5134e" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?wsdl" />
+    <MetadataFile FileName="NetaServices.xsd" MetadataType="Schema" ID="68f3af68-12cb-4d4f-ad94-45c0ad501285" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd2" />
+    <MetadataFile FileName="NetaServices1.xsd" MetadataType="Schema" ID="2cc97098-6001-4a2e-ac06-9c7233e2d9a2" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd0" />
+    <MetadataFile FileName="NetaServices2.xsd" MetadataType="Schema" ID="d056aadd-dc09-40a0-9bd1-d44bbbff4990" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

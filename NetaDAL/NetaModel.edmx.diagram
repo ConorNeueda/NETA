@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="338967aa68c54b4f825cbc1f2aeed582" Name="Diagram1">
+        <EntityTypeShape EntityType="NetaDBModel.county" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetaDBModel.library_board_performance_NI" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetaDBModel.local_authority_data" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetaDBModel.population" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetaDBModel.postcode_speed" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetaDBModel.school_performance" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="NetaDBModel.FK__postcode___count__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="NetaDBModel.FK__school_pe__count__2A4B4B5E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NetaDBModel.view_passrates_by_broadband" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NetaDBModel.average_performance_broadband" Width="1.5" PointX="0.75" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

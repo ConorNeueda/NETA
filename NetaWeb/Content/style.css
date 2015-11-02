@@ -1,0 +1,408 @@
+@import "compass/css3";
+
+body {
+	
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande",    sans-serif; 
+    font-weight: 300;
+	
+	background-color: #eeeeee;
+	margin: 0;
+	padding: 0;
+	color: #868386;
+}
+
+.centerTabs{
+	display:inline;
+	padding-left:70px;
+	margin: auto;
+	width: 600px;
+	align-self:center;
+}
+
+/* ~~ Tabs ~~ */
+
+.tabs {
+	width: 700px;
+	display: inline-block;
+}
+ 
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+		width:300px;
+        margin:0px 5px;
+        float:left;
+		padding-left:24px;
+		text-align:center;
+        list-style:none;
+    }
+ 
+        .tab-links a {
+			width:278px;
+            padding:9px 15px;
+            display:inline-block;
+            
+			background:#e1e0e0;
+			
+            font-size:16px;
+            font-weight:600;
+            color:#4c4c4c;
+            transition:all linear 0.15s;
+        }
+ 
+        .tab-links a:hover {
+            background:#6acedd;
+        }
+ 
+    li.active a, li.active a:hover {
+        background:#383838;
+        color:#ffffff;
+    }
+ 
+    /*----- Content of Tabs -----*/
+    .tab-content {
+        padding:15px;
+        border-radius:3px;
+        background:#eeeeee; /*----- BACKGROUND COLOUR -----*/
+    }
+ 
+        .tab {
+            display:none;
+        }
+ 
+        .tab.active {
+            display:block;
+        }
+
+/* ~~ Tabs End ~~ */
+
+.centerMiniTabs{
+	margin: auto;
+	width: 600px;
+	text-align:center;
+	align-self:center;
+}
+
+/* ~~ Mini Tabs ~~ */
+
+.mtabs {
+	width: 700px;
+	display: inline-block;
+}
+ 
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .mtab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .mtab-links li {
+		width:300px;
+        margin:0px 5px;
+        float:left;
+		padding-left:24px;
+		text-align:center;
+        list-style:none;
+    }
+ 
+        .mtab-links a {
+			width:278px;
+            padding:9px 15px;
+            display:inline-block;
+            
+			background:#e1e0e0;
+			
+            font-size:16px;
+            font-weight:600;
+            color:#4c4c4c;
+            transition:all linear 0.15s;
+        }
+ 
+        .mtab-links ma:hover {
+            background:#a7cce5;
+            text-decoration:none;
+        }
+ 
+    li.active ma, li.active ma:hover {
+        background:#383838;
+        color:#ffffff;
+    }
+ 
+    /*----- Content of Tabs -----*/
+    .mtab-content {
+        padding:15px;
+        border-radius:3px;
+        background:#eeeeee; /*----- BACKGROUND COLOUR -----*/
+    }
+ 
+        .mtab {
+            display:none;
+        }
+ 
+        .mtab.active {
+            display:block;
+        }
+
+/* ~~ Mini Tabs End ~~ */
+
+
+ul, ol, dl { 
+	padding: 0;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;
+	padding-right: 15px;
+	padding-left: 15px;
+	width: auto;
+	height: auto;
+}
+
+header {
+	height:120px;
+	width:100%;
+	background-color: #383838;
+	
+	text-align:center; 
+	margin: 0px;
+	margin-bottom:20px;
+}
+
+.frame {
+	height: 100px;
+	width: 110%;
+	padding-top:5px;
+	white-space: nowrap;
+	text-align:center;
+	margin-bottom: 1em 0;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+/* ~~ Right MenuBar ~~ */
+#rightmenu{
+	padding: 10px 5px 5px 5px;
+	float: right;
+	margin-right: 20px;
+	width: 600px;
+	height: 400px;
+	background: #e1e0e0;
+	border-radius: 10px 10px 10px 80px;
+	clear: right;
+	width: 230px;
+}
+/* ~~ Right MenuBar End ~~ */
+
+.center{
+	margin: auto;
+    width: 600px;
+    border:3px solid #e1e0e0;
+	border-radius: 10px 10px 60px 10px;
+    padding: 20px;
+}
+
+img {
+	margin-top: 1em;
+	margin-right: em;
+	margin-left: em;
+	margin-bottom: 1;
+	vertical-align: middle;
+}
+
+a:link {
+	color: #42413C;
+	text-decoration: underline; 
+}
+
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { 
+	text-decoration: none;
+}
+
+.container {
+	
+	width: auto;
+	background-color: #eeeeee;
+	top: 0px;
+}
+
+/* ~~ Search Bar ~~ */
+
+.round {
+    border-radius: 30px;
+    border: 1px #fefefe solid;
+    padding: 15px 5px 15px 50px;
+	width:240px;
+    
+	/*
+	position: absolute;
+    top: 20px;
+    left: 700px;
+	*/
+}
+
+.icon {
+    position: absolute;
+	
+    top: 142px;
+    left: 1000px;
+	
+    height: 32px;
+    width: 30px;
+    z-index: 10;
+    border-radius: 10px;
+    border: none;
+    background:url(../images/Search30.png) no-repeat;
+}
+
+.search {
+	float: right;
+	width: 350px;
+	clear: right;
+	margin-right: 50px;
+	/*padding-right: 100px;*/
+
+	width: 240px;
+	height: 65px;
+}
+
+/* ~~ End Search Bar ~~ */
+
+.sidebar1 {
+	float: left;
+	padding-left:20px;
+	width: 200px;
+	padding-bottom: 10px;
+}
+
+/* ~~ Accordian SideBar ~~ */
+
+#accordian {
+	background: #eeeeee;
+	width: 200px;
+	color: #fefefe;
+}
+/*heading styles*/
+#accordian h3 {
+	font-size: 12px;
+	line-height: 34px;
+	padding: 0 10px 0 10px;
+	cursor: pointer;
+	/*fallback for browsers not supporting gradients*/
+	background: #383838; 
+	background: linear-gradient(#383838, #404040);
+}
+/*heading hover effect*/
+#accordian h3:hover {
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+}
+/*iconfont styles*/
+#accordian h3 span {
+	font-size: 16px;
+	margin-right: 10px;
+}
+/*list items*/
+#accordian li {
+	list-style-type: none;
+}
+/*links*/
+#accordian ul ul li a {
+	color: black;
+	text-decoration: none;
+	font-size: 11px;
+	line-height: 27px;
+	display: block;
+	padding: 0 15px;
+	/*transition for smooth hover animation*/
+	transition: all 0.15s;
+}
+/*hover effect on links*/
+#accordian ul ul li a:hover {
+	background: #e1e0e0;
+	border-left: 5px solid #383838;
+}
+/*Lets hide the non active LIs by default*/
+#accordian ul ul {
+	display: none;
+}
+
+/* ~~ Accordian SideBar End ~~ */
+
+
+
+.content {
+	padding-right: 0;
+	padding-left: 0;
+	width: 600px;
+	float: left;
+}
+aside {
+	float: left;
+	width: 180px;
+	background-color: #EADCAE;
+	padding: 10px 0;
+}
+
+.content ul, .content ol {
+	padding: 0 15px 15px 40px; 
+}
+
+nav ul{
+	list-style: none; 
+	border-top: 1px solid #666; 
+	margin-bottom: 15px; 
+}
+nav li {
+	border-bottom: 1px solid #666; 
+}
+nav a, nav a:visited { 
+	padding: 5px 5px 5px 15px;
+	display: block; 
+	width: 160px; 
+	text-decoration: none;
+	background-color: #C6D580;
+}
+
+nav a:hover, nav a:active, nav a:focus { 
+	background-color: #ADB96E;
+	color: #FFF;
+}
+
+.fltrt { 
+	float: right;
+	width: 200px;
+	clear: right;
+	margin-right: 50px;
+	padding-right: 100px;
+}
+
+.fltlft { 
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { 
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+header, section, footer, aside, article, figure {
+	display: inherit;
+}
