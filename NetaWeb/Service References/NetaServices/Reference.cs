@@ -108,6 +108,83 @@ namespace NetaWeb.NetaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TopBroadbandSpeed", Namespace="http://schemas.datacontract.org/2004/07/NetaService")]
+    [System.SerializableAttribute()]
+    public partial class TopBroadbandSpeed : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal AverageSpeedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal LatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal LngField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal AverageSpeed {
+            get {
+                return this.AverageSpeedField;
+            }
+            set {
+                if ((this.AverageSpeedField.Equals(value) != true)) {
+                    this.AverageSpeedField = value;
+                    this.RaisePropertyChanged("AverageSpeed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Lat {
+            get {
+                return this.LatField;
+            }
+            set {
+                if ((this.LatField.Equals(value) != true)) {
+                    this.LatField = value;
+                    this.RaisePropertyChanged("Lat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Lng {
+            get {
+                return this.LngField;
+            }
+            set {
+                if ((this.LngField.Equals(value) != true)) {
+                    this.LngField = value;
+                    this.RaisePropertyChanged("Lng");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/NetaService")]
     [System.SerializableAttribute()]
     public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -183,6 +260,12 @@ namespace NetaWeb.NetaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/MyView", ReplyAction="http://tempuri.org/INetaService/MyViewResponse")]
         System.Threading.Tasks.Task<NetaWeb.NetaServices.BBandPassRate[]> MyViewAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/Coordinates", ReplyAction="http://tempuri.org/INetaService/CoordinatesResponse")]
+        NetaWeb.NetaServices.TopBroadbandSpeed[] Coordinates();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/Coordinates", ReplyAction="http://tempuri.org/INetaService/CoordinatesResponse")]
+        System.Threading.Tasks.Task<NetaWeb.NetaServices.TopBroadbandSpeed[]> CoordinatesAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/INetaService/GetDataUsingDataContractResponse")]
         NetaWeb.NetaServices.CompositeType GetDataUsingDataContract(NetaWeb.NetaServices.CompositeType composite);
         
@@ -231,6 +314,14 @@ namespace NetaWeb.NetaServices {
         
         public System.Threading.Tasks.Task<NetaWeb.NetaServices.BBandPassRate[]> MyViewAsync() {
             return base.Channel.MyViewAsync();
+        }
+        
+        public NetaWeb.NetaServices.TopBroadbandSpeed[] Coordinates() {
+            return base.Channel.Coordinates();
+        }
+        
+        public System.Threading.Tasks.Task<NetaWeb.NetaServices.TopBroadbandSpeed[]> CoordinatesAsync() {
+            return base.Channel.CoordinatesAsync();
         }
         
         public NetaWeb.NetaServices.CompositeType GetDataUsingDataContract(NetaWeb.NetaServices.CompositeType composite) {

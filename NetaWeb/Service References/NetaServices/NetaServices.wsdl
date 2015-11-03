@@ -19,6 +19,12 @@
   <wsdl:message name="INetaService_MyView_OutputMessage">
     <wsdl:part name="parameters" element="tns:MyViewResponse" />
   </wsdl:message>
+  <wsdl:message name="INetaService_Coordinates_InputMessage">
+    <wsdl:part name="parameters" element="tns:Coordinates" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_Coordinates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CoordinatesResponse" />
+  </wsdl:message>
   <wsdl:message name="INetaService_GetDataUsingDataContract_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
   </wsdl:message>
@@ -33,6 +39,10 @@
     <wsdl:operation name="MyView">
       <wsdl:input wsaw:Action="http://tempuri.org/INetaService/MyView" message="tns:INetaService_MyView_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INetaService/MyViewResponse" message="tns:INetaService_MyView_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Coordinates">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/Coordinates" message="tns:INetaService_Coordinates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/CoordinatesResponse" message="tns:INetaService_Coordinates_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetDataUsingDataContract" message="tns:INetaService_GetDataUsingDataContract_InputMessage" />
@@ -52,6 +62,15 @@
     </wsdl:operation>
     <wsdl:operation name="MyView">
       <soap:operation soapAction="http://tempuri.org/INetaService/MyView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Coordinates">
+      <soap:operation soapAction="http://tempuri.org/INetaService/Coordinates" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

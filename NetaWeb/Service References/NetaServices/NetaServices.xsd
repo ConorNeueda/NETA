@@ -15,6 +15,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BBandPassRate" nillable="true" type="tns:BBandPassRate" />
+  <xs:complexType name="ArrayOfTopBroadbandSpeed">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TopBroadbandSpeed" nillable="true" type="tns:TopBroadbandSpeed" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTopBroadbandSpeed" nillable="true" type="tns:ArrayOfTopBroadbandSpeed" />
+  <xs:complexType name="TopBroadbandSpeed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AverageSpeed" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Lat" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Lng" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TopBroadbandSpeed" nillable="true" type="tns:TopBroadbandSpeed" />
   <xs:complexType name="CompositeType">
     <xs:sequence>
       <xs:element minOccurs="0" name="BoolValue" type="xs:boolean" />
