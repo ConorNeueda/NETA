@@ -16,6 +16,27 @@ namespace NetaService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class NetaServices : INetaService
     {
+        public List<TopBroadbandSpeed> Coordinates()
+        {
+            List<TopBroadbandSpeed> lstCoordinates = new List<TopBroadbandSpeed>();
+
+            using(NetaDBEntities netaDB = new NetaDBEntities())
+            {
+                var data = from  p in netaDB.postcode_speed
+                           where p.average_speed_mbps == 30
+                           select p;
+
+                foreach(postcode_speed item in data)
+                {
+                    TopBroadbandSpeed topSpeed = Utils.CreateTopSpeedsFromPostcodeSpeeds(item);
+
+                    lstCoordinates.Add(topSpeed);
+                }
+            }
+
+            return lstCoordinates;
+        }
+
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);

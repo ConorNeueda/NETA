@@ -14,4 +14,17 @@ class Utils
  
         return ret;
     }
+
+    public static TopBroadbandSpeed CreateTopSpeedsFromPostcodeSpeeds(postcode_speed postcodeView)
+    {
+        TopBroadbandSpeed topBroadband = new TopBroadbandSpeed();
+
+        topBroadband.Lat = (decimal)postcodeView.latitude;
+        topBroadband.Lng = (decimal)postcodeView.longitude;
+ 
+        topBroadband.AverageSpeed = (decimal)postcodeView.average_speed_mbps;
+
+        return topBroadband;
+    }
+
 }

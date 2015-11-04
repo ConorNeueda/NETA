@@ -21,6 +21,9 @@ namespace NetaService
         List<BBandPassRate> MyView();
 
         [OperationContract]
+        List<TopBroadbandSpeed> Coordinates();
+
+        [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here
@@ -52,7 +55,25 @@ namespace NetaService
         public string SchoolName { get; set; }
     }
 
+    [DataContract]
+    public class TopBroadbandSpeed
+    {
+        public TopBroadbandSpeed(NetaDAL.postcode_speed postcodeSpeed)
+        {
+            AverageSpeed = (decimal)postcodeSpeed.average_speed_mbps;
+            Lat = (decimal)postcodeSpeed.latitude;
+            Lng = (decimal)postcodeSpeed.longitude;
+        }
 
+        public TopBroadbandSpeed() { }
+
+        [DataMember]
+        public decimal AverageSpeed { get; set; }
+        [DataMember]
+        public decimal Lat { get; set; }
+        [DataMember]
+        public decimal Lng { get; set; }
+    }
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
     public class CompositeType
