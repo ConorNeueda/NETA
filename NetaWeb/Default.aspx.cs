@@ -15,9 +15,12 @@ namespace NetaWeb
 {
     public partial class _Default : Page
     {
-        public BBandPassRate[] allItems;
-        public TopBroadbandSpeed[] topSpeeds;
-        
+        private static average_performance_broadband[] allItems;
+        private static BBandPassRate[] allBBandPRItems;
+        private static AuthorityPop_SyncSpeed[] allAuthoritySpeedItems;
+        private static AuthorityEmployment_Speed[] allEmploymentSpeedItems;
+        private static SpearmansRank[] allSRItems;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable myTable = new DataTable();
@@ -36,15 +39,16 @@ namespace NetaWeb
             }
 
             //string path = "C:\\test.csv";
-
-            
-
-            
-
             grdMyGrid.DataSource = myTable;
             grdMyGrid.DataBind();
 
             MakeChart();
+
+            //Anna's Methods
+            AveragePerformanceInFiveGCSEs_Average_BBand_ByCounty();
+            AuthorityPopulation_SyncSpeed();
+            AuthorityEmployment_SyncSpeed();
+            BindCorrelationToLabels();
         }
 
         static DataTable GetDataTableFromCsv(string path, bool isFirstRowHeader)
@@ -128,6 +132,8 @@ namespace NetaWeb
 
         }
 
+        //CONVERT TO DATATABLE
+
         static DataTable ConvertToDatatable(BBandPassRate[] list)
         {
             DataTable datatable = new DataTable();
@@ -150,6 +156,92 @@ namespace NetaWeb
             return datatable;
         }
 
+        static DataTable ConvertToDatatable(average_performance_broadband[] list)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("CountyID");
+            dt.Columns.Add("PercentPassed");
+            dt.Columns.Add("AverageSpeed");
+
+            foreach (var item in list)
+            {
+                var row = dt.NewRow();
+                row["CountyID"] = item.county_id_fk;
+                row["PercentPassed"] = item.Average_Pass_of_5_GCSES;
+                row["AverageSpeed"] = item.Average_Speed_mbps;
+
+                dt.Rows.Add(row);
+            }
+            return dt;
+        }//convertToDT
+
+        static DataTable ConvertToDatatable(AuthorityPop_SyncSpeed[] list)
+        {
+            DataTable datatable = new DataTable();
+
+            datatable.Columns.Add("Authority");
+            datatable.Columns.Add("PopSize");
+            datatable.Columns.Add("SyncSpeed");
+            foreach (var item in list)
+            {
+                var row = datatable.NewRow();
+
+                row["Authority"] = item.Authority;
+                row["PopSize"] = item.PopSize;
+                row["SyncSpeed"] = item.AverageSync;
+
+                datatable.Rows.Add(row);
+            }
+
+            return datatable;
+        }//convertToDT
+
+        static DataTable ConvertToDatatable(AuthorityEmployment_Speed[] list)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("Authority");
+            dt.Columns.Add("EmploymentRate");
+            dt.Columns.Add("SyncSpeed");
+
+            foreach (var item in list)
+            {
+                var row = dt.NewRow();
+
+                row["Authority"] = item.Authority;
+                row["EmploymentRate"] = item.EmploymentRate;
+                row["SyncSpeed"] = item.SyncSpeed;
+
+                dt.Rows.Add(row);
+            }
+
+            return dt;
+        }
+
+        static DataTable ConvertToDatatable(SpearmansRank[] list)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("CorrelationID");
+            dt.Columns.Add("CorrelationName");
+            dt.Columns.Add("SpearmansRho");
+
+            foreach (var item in list)
+            {
+                var row = dt.NewRow();
+
+                row["CorrelationID"] = item.CorrelationID;
+                row["CorrelationName"] = item.CorrelationName;
+                row["SpearmansRho"] = item.SpearmansRho;
+
+                dt.Rows.Add(row);
+            }
+
+            return dt;
+        }//concertToDT
+
+        //GRAPH BUILDING METHODS
         public  void MakeChart()
         {
 
@@ -211,6 +303,246 @@ namespace NetaWeb
         
         }
 
+        public void AveragePerformanceInFiveGCSEs_Average_BBand_ByCounty()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                allItems = proxy.getAverages();
+                var serilizer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+            }
+
+            DataTable dt = new DataTable();
+            dt = ConvertToDatatable(allItems);
+
+            StringBuilder str = new StringBuilder();
+
+            str.Append(@"<script type = 'text/javascript'>
+                            google.load('visualization', '1', {packages: ['corechart']});
+
+                        function drawVisualization(){
+                        var data = google.visualization.arrayToDataTable([
+                        ['CountyID', 'PercentPassed', 'AverageSpeed'],");
+
+            int count = dt.Rows.Count - 1;
+
+            for (int i = 0; i <= count; i++)
+            {
+                if (count == i)
+                {
+                    str.Append("["
+                        + dt.Rows[i]["CountyID"].ToString()
+                        + ","
+                        + dt.Rows[i]["PercentPassed"].ToString()
+                        + ","
+                        + dt.Rows[i]["AverageSpeed"].ToString()
+                        + "]]);");
+                }//if
+                else
+                {
+                    str.Append("["
+                        + dt.Rows[i]["CountyID"].ToString()
+                        + ","
+                         + dt.Rows[i]["PercentPassed"].ToString()
+                        + ","
+                        + dt.Rows[i]["AverageSpeed"].ToString()
+                        + "],");
+                }//else
+            }//for
+
+            str.Append("var options = {vAxes: {0: {title: 'Percent', format: ''},1: {title: 'Average Speed(mbps)', format: '##'}}, hAxis: {title: 'County', format: ''}, seriesType: 'bars', series:{0:{type: 'line', targetAxisIndex: 0 }, 1: {type: 'bars', targetAxisIndex: 1}}, }; ");
+
+            str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_1')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
+
+            Literal1.Text = str.ToString() + "</script>";
+        }//AvgPerformance_Bband_ByCounty
+
+        public void AuthorityPopulation_SyncSpeed()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                allAuthoritySpeedItems = proxy.getUptakeByAuthority();
+                var serilizer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            }
+
+            DataTable dt = new DataTable();
+            dt = ConvertToDatatable(allAuthoritySpeedItems);
+
+            StringBuilder str = new StringBuilder();
+
+            str.Append(@"<script type = 'text/javascript'>
+                            google.load('visualization', '1', {packages: ['corechart']});
+
+                        function drawVisualization(){
+                        var data = google.visualization.arrayToDataTable([
+                        ['Authority', 'PopSize', 'SyncSpeed'],");
+
+            int count = dt.Rows.Count - 1;
+
+            for (int i = 0; i <= count; i++)
+            {
+                if (count == i)
+                {
+                    str.Append("['"
+                        + dt.Rows[i]["Authority"].ToString()
+                        + "',"
+                        + dt.Rows[i]["PopSize"].ToString()
+                        + ","
+                        + dt.Rows[i]["SyncSpeed"].ToString()
+                        + "]]);");
+                }//if
+                else
+                {
+                    str.Append("['"
+                        + dt.Rows[i]["Authority"].ToString()
+                        + "',"
+                         + dt.Rows[i]["PopSize"].ToString()
+                        + ","
+                        + dt.Rows[i]["SyncSpeed"].ToString()
+                        + "],");
+                }//else
+            }//for
+
+            str.Append("var options = {vAxes: {0: {title: 'Population Size', format: ''},1: {title: 'Sync Speed mbits', format: '##'}}, hAxis: {title: 'Authority', format: ''}, seriesType: 'bars', series:{0:{type: 'line', targetAxisIndex: 0 }, 1: {type: 'bars', targetAxisIndex: 1}}, }; ");
+
+            str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_2')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
+
+            Literal2.Text = str.ToString() + "</script>";
+        }//AvgPop_SyncSpeed
+
+        public void AuthorityEmployment_SyncSpeed()//AuthorityEmployment_SyncSpeed
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                allEmploymentSpeedItems = proxy.GetAuthorityEmployment_Speed();
+                var serilizer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            }
+
+            DataTable dt = new DataTable();
+            dt = ConvertToDatatable(allEmploymentSpeedItems);
+
+            StringBuilder str = new StringBuilder();
+
+            str.Append(@"<script type = 'text/javascript'>
+                            google.load('visualization', '1', {packages: ['corechart']});
+
+                        function drawVisualization(){
+                        var data = google.visualization.arrayToDataTable([
+                        ['Authority', 'EmploymentRate', 'SyncSpeed'],");
+
+            int count = dt.Rows.Count - 1;
+
+            for (int i = 0; i <= count; i++)
+            {
+                if (count == i)
+                {
+                    str.Append("['"
+                        + dt.Rows[i]["Authority"].ToString()
+                        + "',"
+                        + dt.Rows[i]["EmploymentRate"].ToString()
+                        + ","
+                        + dt.Rows[i]["SyncSpeed"].ToString()
+                        + "]]);");
+                }//if
+                else
+                {
+                    str.Append("['"
+                        + dt.Rows[i]["Authority"].ToString()
+                        + "',"
+                         + dt.Rows[i]["EmploymentRate"].ToString()
+                        + ","
+                        + dt.Rows[i]["SyncSpeed"].ToString()
+                        + "],");
+                }//else
+            }//for
+
+            str.Append("var options = {vAxes: {0: {title: 'Employment Rate', format: '##'},1: {title: 'Sync Speed mbits', format: '##'}}, hAxis: {title: 'Authority', format: ''}, seriesType: 'bars', series:{0:{type: 'bars', targetAxisIndex: 0 }, 1: {type: 'line', targetAxisIndex: 1}}, }; ");
+
+            str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_3')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
+
+            Literal3.Text = str.ToString() + "</script>";
+        }
+
+        public static string Serialize(object o)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return js.Serialize(o);
+        }
+
+        //GET CORRELATION METHODS
+
+        static decimal GetApbCorrelation()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                apbCorrelation = proxy.GetCountyAveragePerformance_BroadbandCorrelation();
+            }
+            return apbCorrelation;
+        }
+
+        static decimal GetBbprCorrelation()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                bbprCorrelation = proxy.GetSchoolPR_BroadbandCorrelation();
+            }
+            return bbprCorrelation;
+        }
+
+        static decimal GetApssCorrelation()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                apssCorrelation = proxy.GetAuthorityPop_SyncSpeedCorrelation();
+            }
+
+            return apssCorrelation;
+        }
+
+        static decimal GetAesCorrelation()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                aesCorrelation = proxy.GetAuthoritySpeed_EmploymentCorrelation();
+            }
+
+            return aesCorrelation;
+        }
+
+        //BIND DATATABLE TO GRIDVIEW ITEMS
+
+        private void BindGVData()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                average_performance_broadband[] allItems = proxy.getAverages();
+
+                Grid1D.DataSource = allItems;
+                Grid1D.DataBind();
+
+            }
+        }
+
+        private void BindSpearmansToGridview()
+        {
+            using (NetaServiceClient proxy = new NetaServiceClient())
+            {
+                SpearmansRank[] allItems = proxy.CreateSpearmansRankTable();
+
+                Grid1D.DataSource = allItems;
+                Grid1D.DataBind();
+            }
+        }
+
+        private void BindCorrelationToLabels()
+        {
+            APBLabel.Text = GetApbCorrelation().ToString();
+            BbprLabel.Text = GetBbprCorrelation().ToString();
+            ApssLabel.Text = GetApssCorrelation().ToString();
+            AesLabel.Text = GetAesCorrelation().ToString();
+        }
+
+        //METHODS ASSOCIATED WITH FILE UPLOADS
         protected void UploadFile(object sender, EventArgs e)
         {
             DataTable myTable = new DataTable();
