@@ -17,7 +17,7 @@ namespace NetaWeb
     {
         public BBandPassRate[] allItems;
         public TopBroadbandSpeed[] topSpeeds;
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable myTable = new DataTable();
@@ -28,23 +28,15 @@ namespace NetaWeb
                 foreach (string filePath in filePaths)
                 {
                     files.Add(new ListItem(Path.GetFileName(filePath), filePath));
-                    myTable = GetDataTableFromCsv(filePath, false);
-                    GridView1.DataSource = files;
-                    GridView1.DataBind();
+                    myTable = GetDataTableFromCsv(filePath, true);
+                    grdFiles.DataSource = files;
+                    grdFiles.DataBind();
                 }
-                
             }
+            csvUploadResults.DataSource = myTable;
+            csvUploadResults.DataBind();
 
-            //string path = "C:\\test.csv";
-
-            
-
-            
-
-            grdMyGrid.DataSource = myTable;
-            grdMyGrid.DataBind();
-
-            MakeChart();
+            MakeChart(0, "");
         }
 
         static DataTable GetDataTableFromCsv(string path, bool isFirstRowHeader)
@@ -150,15 +142,11 @@ namespace NetaWeb
             return datatable;
         }
 
-        public  void MakeChart()
+        public void MakeChart(int xAxis, string yAxis)
         {
-
             using (NetaServiceClient proxy = new NetaServiceClient())
             {
                 allItems = proxy.MyView();
-                var serilizer = new System.Web.Script.Serialization.JavaScriptSerializer();
-
-
             }
 
             DataTable dt = new DataTable();
@@ -208,7 +196,7 @@ namespace NetaWeb
                          chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
             lt.Text = str.ToString() + "</script>";
-        
+
         }
 
         protected void UploadFile(object sender, EventArgs e)
@@ -216,18 +204,19 @@ namespace NetaWeb
             DataTable myTable = new DataTable();
 
             string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
-            if (FileUpload1.FileName != null)
+            if (FileUpload1.FileName != null && FileUpload1.PostedFile != null)
             {
                 FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
                 string fullPath = Server.MapPath("~/Uploads/") + fileName;
 
-                myTable = GetDataTableFromCsv(fullPath, false);
+                myTable = GetDataTableFromCsv(fullPath, true);
 
-                grdMyGrid.DataSource = myTable;
-                grdMyGrid.DataBind();
+                csvUploadResults.DataSource = myTable;
+                csvUploadResults.DataBind();
 
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
+
 
         }
 
@@ -245,6 +234,28 @@ namespace NetaWeb
             string filePath = (sender as LinkButton).CommandArgument;
             File.Delete(filePath);
             Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+        protected void ViewFile(object sender, EventArgs e)
+        {
+            string filepath = (sender as LinkButton).CommandArgument;
+            DataTable viewFileDataTable = new DataTable();
+
+            viewFileDataTable = GetDataTableFromCsv(filepath, true);
+
+            csvUploadResults.DataSource = viewFileDataTable;
+            csvUploadResults.DataBind();
+        }
+         
+        protected void btnPlot_OnCLick(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnMerge_OnClick(object sender, EventArgs e)
+        {
+            int x = grdFiles.Rows.Count;
+            string y = grdFiles.Rows[0].Cells[0].Text;
         }
     }
 }

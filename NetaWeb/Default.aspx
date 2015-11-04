@@ -4,33 +4,75 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-          <asp:GridView ID="grdMyGrid" runat="server">
-          </asp:GridView>
-
-          <br />
-
-
-
-
-<asp:FileUpload ID="FileUpload1" runat="server" />
-<asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="UploadFile" />
-<hr />
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" EmptyDataText = "No files uploaded">
-    <Columns>
-        <asp:BoundField DataField="Text" HeaderText="File Name" />
-        <asp:TemplateField>
-            <ItemTemplate>
-                <asp:LinkButton ID="lnkDownload" Text = "Download" CommandArgument = '<%# Eval("Value") %>' runat="server" OnClick = "DownloadFile"></asp:LinkButton>
-            </ItemTemplate>
-        </asp:TemplateField>
-        <asp:TemplateField>
-            <ItemTemplate>
-                <asp:LinkButton ID = "lnkDelete" Text = "Delete" CommandArgument = '<%# Eval("Value") %>' runat = "server" OnClick = "DeleteFile" />
-            </ItemTemplate>
-        </asp:TemplateField>
-    </Columns>
-</asp:GridView>
-
+         
+<br />
+<br />
+<div id="csv_upload_div" style="border:1px solid black;margin:10px;padding:10px;">
+    <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="UploadFile" />
+        <hr />
+        <asp:GridView ID="grdFiles" runat="server" AutoGenerateColumns="false" EmptyDataText = "No files uploaded">
+            <Columns>
+                <asp:BoundField DataField="Text" HeaderText="File Name" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lnkDownload" Text = "Download" CommandArgument = '<%# Eval("Value") %>' runat="server" OnClick = "DownloadFile"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID = "lnkDelete" Text = "Delete" CommandArgument = '<%# Eval("Value") %>' runat = "server" OnClick = "DeleteFile" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID = "lnkView" Text = "View" CommandArgument = '<%# Eval("Value") %>' runat = "server" OnClick = "ViewFile" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+        <asp:Button ID="btnMerge" OnClick="btnMerge_OnClick" runat="server" Text="Merge Data" />
+    </div>
+        <br />
+        <br />
+    <div>
+         <asp:GridView ID="csvUploadResults" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+             <AlternatingRowStyle BackColor="White" />
+             <EditRowStyle BackColor="#2461BF" />
+             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+             <RowStyle BackColor="#EFF3FB" />
+             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+             <SortedAscendingCellStyle BackColor="#F5F7FB" />
+             <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+             <SortedDescendingCellStyle BackColor="#E9EBEF" />
+             <SortedDescendingHeaderStyle BackColor="#4870BE" />
+         </asp:GridView>
+        <br />
+        <br />
+        <br />
+        Select X Axis column (enter column number)
+        <br />
+        <asp:TextBox runat="server" ID ="txtXAxis"></asp:TextBox>
+        <br />
+        Select Y Axis column (enter column number)
+        <br />
+        <asp:TextBox runat="server" ID ="txtYAxis"></asp:TextBox>
+        <br />
+        <asp:Button runat="server" ID="btnPlot" Text="plot" OnClick="btnPlot_OnCLick" />
+        <br />
+        <br />
+    </div>
+</div>
+<br />
+<br />
 
 
           <div style="width: 600px;height:auto; overflow: auto;overflow-y: hidden;">

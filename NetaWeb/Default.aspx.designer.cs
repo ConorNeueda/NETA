@@ -13,15 +13,6 @@ namespace NetaWeb {
     public partial class _Default {
         
         /// <summary>
-        /// grdMyGrid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdMyGrid;
-        
-        /// <summary>
         /// FileUpload1 control.
         /// </summary>
         /// <remarks>
@@ -40,13 +31,58 @@ namespace NetaWeb {
         protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
-        /// GridView1 control.
+        /// grdFiles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView grdFiles;
+        
+        /// <summary>
+        /// btnMerge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMerge;
+        
+        /// <summary>
+        /// csvUploadResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView csvUploadResults;
+        
+        /// <summary>
+        /// txtXAxis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtXAxis;
+        
+        /// <summary>
+        /// txtYAxis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtYAxis;
+        
+        /// <summary>
+        /// btnPlot control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPlot;
         
         /// <summary>
         /// lt control.
