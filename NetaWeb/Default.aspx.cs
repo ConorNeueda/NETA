@@ -254,8 +254,30 @@ namespace NetaWeb
 
         protected void btnMerge_OnClick(object sender, EventArgs e)
         {
-            int x = grdFiles.Rows.Count;
-            string y = grdFiles.Rows[0].Cells[0].Text;
+            List<string> filepaths = new List<string>();
+            List<DataTable> allTables = new List<DataTable>();
+            DataTable mergedTables = new DataTable();
+            int rowCount = grdFiles.Rows.Count;
+            
+            for (int i = 0; i < rowCount; i++)
+            {
+                string y = grdFiles.Rows[i].Cells[0].Text;
+                filepaths.Add(Server.MapPath("~/Uploads/") + y);
+            }
+
+            foreach(string path in filepaths)
+            {
+                DataTable dt = new DataTable();
+                dt = GetDataTableFromCsv(path, true);
+                allTables.Add(dt);
+            }
+
+            foreach(DataTable datatable in allTables)
+            {
+                mergedTables.Merge(datatable);
+            }
+            csvUploadResults.DataSource = mergedTables;
+            csvUploadResults.DataBind();
         }
     }
 }
