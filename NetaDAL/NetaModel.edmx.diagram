@@ -15,6 +15,13 @@
         <AssociationConnector Association="NetaDBModel.FK__school_pe__count__2A4B4B5E" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NetaDBModel.view_passrates_by_broadband" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="NetaDBModel.average_performance_broadband" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="NetaDBModel.authority_employment_syncspeed_rankings" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="NetaDBModel.county_performance_broadband_rankings" Width="1.5" PointX="8.375" PointY="6.75" />
+        <EntityTypeShape EntityType="NetaDBModel.la_pop_speed_ranked" Width="1.5" PointX="3.375" PointY="9.75" />
+        <EntityTypeShape EntityType="NetaDBModel.passrates_broadband_ranked" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="NetaDBModel.spearmans_ranks" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="NetaDBModel.local_authority_population_sync_speed" Width="1.5" PointX="9.375" PointY="9.75" />
+        <AssociationConnector Association="NetaDBModel.FK__local_aut__libra__5629CD9C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

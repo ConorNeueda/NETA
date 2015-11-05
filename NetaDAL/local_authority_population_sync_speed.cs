@@ -12,17 +12,11 @@ namespace NetaDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class local_authority_data
+    public partial class local_authority_population_sync_speed
     {
         public int id { get; set; }
-        public string local_authority { get; set; }
-        public string postcode_area { get; set; }
-        public decimal percentage_not_receiving_2mbs { get; set; }
+        public string authority { get; set; }
+        public Nullable<long> population_size { get; set; }
         public decimal average_sync_speed_mBits { get; set; }
-        public decimal superfast_broadband_availability { get; set; }
-        public Nullable<int> library_board_fk { get; set; }
-        public Nullable<int> employment_rate { get; set; }
-    
-        public virtual library_board_performance_NI library_board_performance_NI { get; set; }
     }
 }

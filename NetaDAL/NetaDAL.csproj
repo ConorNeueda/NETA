@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="authority_employment_syncspeed_rankings.cs">
+      <DependentUpon>NetaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="average_performance_broadband.cs">
       <DependentUpon>NetaModel.tt</DependentUpon>
     </Compile>
@@ -58,10 +61,19 @@
     <Compile Include="county.cs">
       <DependentUpon>NetaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="county_performance_broadband_rankings.cs">
+      <DependentUpon>NetaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="la_pop_speed_ranked.cs">
+      <DependentUpon>NetaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="library_board_performance_NI.cs">
       <DependentUpon>NetaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="local_authority_data.cs">
+      <DependentUpon>NetaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="local_authority_population_sync_speed.cs">
       <DependentUpon>NetaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="NetaModel.Context.cs">
@@ -79,6 +91,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NetaModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="passrates_broadband_ranked.cs">
+      <DependentUpon>NetaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="population.cs">
       <DependentUpon>NetaModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +102,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="school_performance.cs">
+      <DependentUpon>NetaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spearmans_ranks.cs">
       <DependentUpon>NetaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="view_passrates_by_broadband.cs">

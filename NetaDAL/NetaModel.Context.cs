@@ -33,5 +33,11 @@ namespace NetaDAL
         public virtual DbSet<school_performance> school_performance { get; set; }
         public virtual DbSet<view_passrates_by_broadband> view_passrates_by_broadband { get; set; }
         public virtual DbSet<average_performance_broadband> average_performance_broadband { get; set; }
+        public virtual DbSet<authority_employment_syncspeed_rankings> authority_employment_syncspeed_rankings { get; set; }
+        public virtual DbSet<county_performance_broadband_rankings> county_performance_broadband_rankings { get; set; }
+        public virtual DbSet<la_pop_speed_ranked> la_pop_speed_ranked { get; set; }
+        public virtual DbSet<passrates_broadband_ranked> passrates_broadband_ranked { get; set; }
+        public virtual DbSet<spearmans_ranks> spearmans_ranks { get; set; }
+        public virtual DbSet<local_authority_population_sync_speed> local_authority_population_sync_speed { get; set; }
     }
 }

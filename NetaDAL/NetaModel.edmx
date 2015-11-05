@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="NetaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="authority_employment_syncspeed_rankings">
+          <Key>
+            <PropertyRef Name="authority_id" />
+          </Key>
+          <Property Name="authority_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="authority_name" Type="char" MaxLength="26" Nullable="false" />
+          <Property Name="sync_speed" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="employment_rate" Type="int" Nullable="false" />
+          <Property Name="speed_ranking" Type="int" />
+          <Property Name="employment_ranking" Type="int" />
+        </EntityType>
         <EntityType Name="average_performance_broadband">
           <Key>
             <PropertyRef Name="id" />
@@ -20,6 +31,28 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="county" Type="char" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="county_performance_broadband_rankings">
+          <Key>
+            <PropertyRef Name="county_id" />
+          </Key>
+          <Property Name="county_id" Type="int" Nullable="false" />
+          <Property Name="county_name" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="average_speed" Type="decimal" Precision="8" Scale="6" />
+          <Property Name="average_pass" Type="decimal" Precision="8" Scale="6" />
+          <Property Name="speed_ranking" Type="int" />
+          <Property Name="pass_ranking" Type="int" />
+        </EntityType>
+        <EntityType Name="la_pop_speed_ranked">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="authority" Type="char" MaxLength="26" Nullable="false" />
+          <Property Name="pop_size" Type="bigint" Nullable="false" />
+          <Property Name="average_sync_speed" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="pop_ranking" Type="int" Nullable="false" />
+          <Property Name="sync_ranking" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="library_board_performance_NI">
           <Key>
@@ -42,6 +75,19 @@
           <Property Name="percentage_not_receiving_2mbs" Type="decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="average_sync_speed_mBits" Type="decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="superfast_broadband_availability" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="library_board_fk" Type="int" />
+          <Property Name="employment_rate" Type="int" />
+        </EntityType>
+        <EntityType Name="passrates_broadband_ranked">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="school" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="average_speed" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="percent_passed" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="speed_rank" Type="int" Nullable="false" />
+          <Property Name="pass_rank" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="population">
           <Key>
@@ -79,6 +125,14 @@
           <Property Name="percent_entitled_free_meals" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="county_id_fk" Type="int" />
         </EntityType>
+        <EntityType Name="spearmans_ranks">
+          <Key>
+            <PropertyRef Name="correlation_id" />
+          </Key>
+          <Property Name="correlation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="correlation_name" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="spearmans_rho" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'NetaDB.dbo.average_speed_pass_5_gcses_county' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="average_speed_pass_5_gcses_county">
@@ -86,6 +140,19 @@ warning 6013: The table/view 'NetaDB.dbo.average_speed_pass_5_gcses_county' does
           <Property Name="Average Speed mbps" Type="decimal" Precision="38" Scale="6" />
           <Property Name="Average Pass of 5 GCSES" Type="decimal" Precision="38" Scale="6" />
         </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NetaDB.dbo.local_authority_population_sync_speed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="local_authority_population_sync_speed">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="authority" />
+            <PropertyRef Name="average_sync_speed_mBits" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="authority" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="population_size" Type="bigint" />
+          <Property Name="average_sync_speed_mBits" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_passrates_by_broadband">
@@ -99,6 +166,18 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
           <Property Name="percent_5_pass_grades_gcse" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="school_name" Type="char" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__local_aut__libra__5629CD9C">
+          <End Role="library_board_performance_NI" Type="Self.library_board_performance_NI" Multiplicity="0..1" />
+          <End Role="local_authority_data" Type="Self.local_authority_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="library_board_performance_NI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="local_authority_data">
+              <PropertyRef Name="library_board_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__postcode___count__21B6055D">
           <End Role="counties" Type="Self.counties" Multiplicity="0..1" />
           <End Role="postcode_speed" Type="Self.postcode_speed" Multiplicity="*" />
@@ -124,13 +203,26 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="NetaDBModelStoreContainer">
+          <EntitySet Name="authority_employment_syncspeed_rankings" EntityType="Self.authority_employment_syncspeed_rankings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="average_performance_broadband" EntityType="Self.average_performance_broadband" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="counties" EntityType="Self.counties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="county_performance_broadband_rankings" EntityType="Self.county_performance_broadband_rankings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="la_pop_speed_ranked" EntityType="Self.la_pop_speed_ranked" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="library_board_performance_NI" EntityType="Self.library_board_performance_NI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="local_authority_data" EntityType="Self.local_authority_data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="passrates_broadband_ranked" EntityType="Self.passrates_broadband_ranked" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="population" EntityType="Self.population" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="postcode_speed" EntityType="Self.postcode_speed" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="school_performance" EntityType="Self.school_performance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="spearmans_ranks" EntityType="Self.spearmans_ranks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="local_authority_population_sync_speed" EntityType="Self.local_authority_population_sync_speed" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [local_authority_population_sync_speed].[id] AS [id], 
+    [local_authority_population_sync_speed].[authority] AS [authority], 
+    [local_authority_population_sync_speed].[population_size] AS [population_size], 
+    [local_authority_population_sync_speed].[average_sync_speed_mBits] AS [average_sync_speed_mBits]
+    FROM [dbo].[local_authority_population_sync_speed] AS [local_authority_population_sync_speed]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="view_passrates_by_broadband" EntityType="Self.view_passrates_by_broadband" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [view_passrates_by_broadband].[postcode] AS [postcode], 
@@ -139,6 +231,10 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
     [view_passrates_by_broadband].[school_name] AS [school_name]
     FROM [dbo].[view_passrates_by_broadband] AS [view_passrates_by_broadband]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__local_aut__libra__5629CD9C" Association="Self.FK__local_aut__libra__5629CD9C">
+            <End Role="library_board_performance_NI" EntitySet="library_board_performance_NI" />
+            <End Role="local_authority_data" EntitySet="local_authority_data" />
+          </AssociationSet>
           <AssociationSet Name="FK__postcode___count__21B6055D" Association="Self.FK__postcode___count__21B6055D">
             <End Role="counties" EntitySet="counties" />
             <End Role="postcode_speed" EntitySet="postcode_speed" />
@@ -171,6 +267,7 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
           <Property Name="percent_5_pass_grades" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="percent_7_pass_grades_non_grammar" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="percent_5_pass_grades_non_grammar" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="local_authority_data" Relationship="NetaDBModel.FK__local_aut__libra__5629CD9C" FromRole="library_board_performance_NI" ToRole="local_authority_data" />
         </EntityType>
         <EntityType Name="local_authority_data">
           <Key>
@@ -182,6 +279,9 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
           <Property Name="percentage_not_receiving_2mbs" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="average_sync_speed_mBits" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="superfast_broadband_availability" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="library_board_fk" Type="Int32" />
+          <Property Name="employment_rate" Type="Int32" />
+          <NavigationProperty Name="library_board_performance_NI" Relationship="NetaDBModel.FK__local_aut__libra__5629CD9C" FromRole="local_authority_data" ToRole="library_board_performance_NI" />
         </EntityType>
         <EntityType Name="population">
           <Key>
@@ -262,6 +362,16 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
           </AssociationSet>
           <EntitySet Name="view_passrates_by_broadband" EntityType="NetaDBModel.view_passrates_by_broadband" />
           <EntitySet Name="average_performance_broadband" EntityType="NetaDBModel.average_performance_broadband" />
+          <EntitySet Name="authority_employment_syncspeed_rankings" EntityType="NetaDBModel.authority_employment_syncspeed_rankings" />
+          <EntitySet Name="county_performance_broadband_rankings" EntityType="NetaDBModel.county_performance_broadband_rankings" />
+          <EntitySet Name="la_pop_speed_ranked" EntityType="NetaDBModel.la_pop_speed_ranked" />
+          <EntitySet Name="passrates_broadband_ranked" EntityType="NetaDBModel.passrates_broadband_ranked" />
+          <EntitySet Name="spearmans_ranks" EntityType="NetaDBModel.spearmans_ranks" />
+          <EntitySet Name="local_authority_population_sync_speed" EntityType="NetaDBModel.local_authority_population_sync_speed" />
+          <AssociationSet Name="FK__local_aut__libra__5629CD9C" Association="NetaDBModel.FK__local_aut__libra__5629CD9C">
+            <End Role="library_board_performance_NI" EntitySet="library_board_performance_NI" />
+            <End Role="local_authority_data" EntitySet="local_authority_data" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="view_passrates_by_broadband">
           <Key>
@@ -283,6 +393,81 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
           <Property Name="Average_Pass_of_5_GCSES" Type="Decimal" Precision="38" Scale="6" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="authority_employment_syncspeed_rankings">
+          <Key>
+            <PropertyRef Name="authority_id" />
+          </Key>
+          <Property Name="authority_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="authority_name" Type="String" Nullable="false" MaxLength="26" FixedLength="true" Unicode="false" />
+          <Property Name="sync_speed" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="employment_rate" Type="Int32" Nullable="false" />
+          <Property Name="speed_ranking" Type="Int32" />
+          <Property Name="employment_ranking" Type="Int32" />
+        </EntityType>
+        <EntityType Name="county_performance_broadband_rankings">
+          <Key>
+            <PropertyRef Name="county_id" />
+          </Key>
+          <Property Name="county_id" Type="Int32" Nullable="false" />
+          <Property Name="county_name" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="average_speed" Type="Decimal" Precision="8" Scale="6" />
+          <Property Name="average_pass" Type="Decimal" Precision="8" Scale="6" />
+          <Property Name="speed_ranking" Type="Int32" />
+          <Property Name="pass_ranking" Type="Int32" />
+        </EntityType>
+        <EntityType Name="la_pop_speed_ranked">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="authority" Type="String" Nullable="false" MaxLength="26" FixedLength="true" Unicode="false" />
+          <Property Name="pop_size" Type="Int64" Nullable="false" />
+          <Property Name="average_sync_speed" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="pop_ranking" Type="Int32" Nullable="false" />
+          <Property Name="sync_ranking" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="passrates_broadband_ranked">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="school" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="average_speed" Type="Decimal" Nullable="false" Precision="3" Scale="1" />
+          <Property Name="percent_passed" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="speed_rank" Type="Int32" Nullable="false" />
+          <Property Name="pass_rank" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="spearmans_ranks">
+          <Key>
+            <PropertyRef Name="correlation_id" />
+          </Key>
+          <Property Name="correlation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="correlation_name" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="spearmans_rho" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+        </EntityType>
+        <EntityType Name="local_authority_population_sync_speed">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="authority" />
+            <PropertyRef Name="average_sync_speed_mBits" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="authority" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="population_size" Type="Int64" />
+          <Property Name="average_sync_speed_mBits" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+        </EntityType>
+        <Association Name="FK__local_aut__libra__5629CD9C">
+          <End Type="NetaDBModel.library_board_performance_NI" Role="library_board_performance_NI" Multiplicity="0..1" />
+          <End Type="NetaDBModel.local_authority_data" Role="local_authority_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="library_board_performance_NI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="local_authority_data">
+              <PropertyRef Name="library_board_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -312,6 +497,8 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
           <EntitySetMapping Name="local_authority_data">
             <EntityTypeMapping TypeName="NetaDBModel.local_authority_data">
               <MappingFragment StoreEntitySet="local_authority_data">
+                <ScalarProperty Name="employment_rate" ColumnName="employment_rate" />
+                <ScalarProperty Name="library_board_fk" ColumnName="library_board_fk" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="local_authority" ColumnName="local_authority" />
                 <ScalarProperty Name="postcode_area" ColumnName="postcode_area" />
@@ -377,6 +564,73 @@ warning 6002: The table/view 'NetaDB.dbo.view_passrates_by_broadband' does not h
                 <ScalarProperty Name="Average_Pass_of_5_GCSES" ColumnName="Average Pass of 5 GCSES" />
                 <ScalarProperty Name="Average_Speed_mbps" ColumnName="Average Speed mbps" />
                 <ScalarProperty Name="county_id_fk" ColumnName="county_id_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="authority_employment_syncspeed_rankings">
+            <EntityTypeMapping TypeName="NetaDBModel.authority_employment_syncspeed_rankings">
+              <MappingFragment StoreEntitySet="authority_employment_syncspeed_rankings">
+                <ScalarProperty Name="employment_ranking" ColumnName="employment_ranking" />
+                <ScalarProperty Name="speed_ranking" ColumnName="speed_ranking" />
+                <ScalarProperty Name="employment_rate" ColumnName="employment_rate" />
+                <ScalarProperty Name="sync_speed" ColumnName="sync_speed" />
+                <ScalarProperty Name="authority_name" ColumnName="authority_name" />
+                <ScalarProperty Name="authority_id" ColumnName="authority_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="county_performance_broadband_rankings">
+            <EntityTypeMapping TypeName="NetaDBModel.county_performance_broadband_rankings">
+              <MappingFragment StoreEntitySet="county_performance_broadband_rankings">
+                <ScalarProperty Name="pass_ranking" ColumnName="pass_ranking" />
+                <ScalarProperty Name="speed_ranking" ColumnName="speed_ranking" />
+                <ScalarProperty Name="average_pass" ColumnName="average_pass" />
+                <ScalarProperty Name="average_speed" ColumnName="average_speed" />
+                <ScalarProperty Name="county_name" ColumnName="county_name" />
+                <ScalarProperty Name="county_id" ColumnName="county_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="la_pop_speed_ranked">
+            <EntityTypeMapping TypeName="NetaDBModel.la_pop_speed_ranked">
+              <MappingFragment StoreEntitySet="la_pop_speed_ranked">
+                <ScalarProperty Name="sync_ranking" ColumnName="sync_ranking" />
+                <ScalarProperty Name="pop_ranking" ColumnName="pop_ranking" />
+                <ScalarProperty Name="average_sync_speed" ColumnName="average_sync_speed" />
+                <ScalarProperty Name="pop_size" ColumnName="pop_size" />
+                <ScalarProperty Name="authority" ColumnName="authority" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="passrates_broadband_ranked">
+            <EntityTypeMapping TypeName="NetaDBModel.passrates_broadband_ranked">
+              <MappingFragment StoreEntitySet="passrates_broadband_ranked">
+                <ScalarProperty Name="pass_rank" ColumnName="pass_rank" />
+                <ScalarProperty Name="speed_rank" ColumnName="speed_rank" />
+                <ScalarProperty Name="percent_passed" ColumnName="percent_passed" />
+                <ScalarProperty Name="average_speed" ColumnName="average_speed" />
+                <ScalarProperty Name="school" ColumnName="school" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="spearmans_ranks">
+            <EntityTypeMapping TypeName="NetaDBModel.spearmans_ranks">
+              <MappingFragment StoreEntitySet="spearmans_ranks">
+                <ScalarProperty Name="spearmans_rho" ColumnName="spearmans_rho" />
+                <ScalarProperty Name="correlation_name" ColumnName="correlation_name" />
+                <ScalarProperty Name="correlation_id" ColumnName="correlation_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="local_authority_population_sync_speed">
+            <EntityTypeMapping TypeName="NetaDBModel.local_authority_population_sync_speed">
+              <MappingFragment StoreEntitySet="local_authority_population_sync_speed">
+                <ScalarProperty Name="average_sync_speed_mBits" ColumnName="average_sync_speed_mBits" />
+                <ScalarProperty Name="population_size" ColumnName="population_size" />
+                <ScalarProperty Name="authority" ColumnName="authority" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
