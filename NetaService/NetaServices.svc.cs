@@ -7,18 +7,12 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
-
 using NetaDAL;
 
 namespace NetaService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class NetaServices : INetaService
-    {
-    
-
-        public List<average_performance_broadband> getAverages()
+   
+            public List<average_performance_broadband> getAverages()
         {
             List<average_performance_broadband> list = new List<average_performance_broadband>();
 
@@ -39,7 +33,24 @@ namespace NetaService
             }
         }
 
-        public average_performance_broadband[] getCountyAveragePerformanceArray()
+    public List<BBandPassRate> MyView()
+    {
+        List<BBandPassRate> lstPassRates = new List<BBandPassRate>();
+
+        using (NetaDBEntities neta = new NetaDBEntities())
+        {
+            var myData = from p in neta.view_passrates_by_broadband select p;
+
+            foreach (view_passrates_by_broadband viewItem in myData)
+            {
+                BBandPassRate bbRate = Utils.CreteBBandPassRateFromDBView(viewItem);
+
+                lstPassRates.Add(bbRate);
+            }
+        }
+        return lstPassRates;
+    }
+    public average_performance_broadband[] getCountyAveragePerformanceArray()
         {
             List<average_performance_broadband> list = new List<average_performance_broadband>();
             using (NetaDBEntities db = new NetaDBEntities())
@@ -115,6 +126,9 @@ namespace NetaService
             return list;
         }
 
+        //Methods to retrieve correlation results from the 
+        //SpearmansRank database table
+
         public decimal GetSchoolPR_BroadbandCorrelation()
         {
             int id = 3;
@@ -174,24 +188,6 @@ namespace NetaService
                 correlation = getCorrelation;
             }
             return correlation;
-        }
-
-        public List<BBandPassRate> MyView()
-        {
-            List<BBandPassRate> lstPassRates = new List<BBandPassRate>();
-
-            using (NetaDBEntities neta = new NetaDBEntities())
-            {
-                var myData = from p in neta.view_passrates_by_broadband select p;
-
-                foreach (view_passrates_by_broadband viewItem in myData)
-                {
-                    BBandPassRate bbRate = Utils.CreteBBandPassRateFromDBView(viewItem);
-
-                    lstPassRates.Add(bbRate);
-                }
-            }
-            return lstPassRates;
         }
     }
 }
