@@ -31,6 +31,15 @@ namespace NetaWeb {
         protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// grdFiles control.
         /// </summary>
         /// <remarks>
@@ -67,22 +76,22 @@ namespace NetaWeb {
         protected global::System.Web.UI.WebControls.TextBox txtXAxis;
         
         /// <summary>
-        /// txtYAxis control.
+        /// txtYAxis1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtYAxis;
+        protected global::System.Web.UI.WebControls.TextBox txtYAxis1;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtYAxis2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtYAxis2;
         
         /// <summary>
         /// btnPlot control.

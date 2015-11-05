@@ -14,45 +14,58 @@
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="UploadFile" />
         <hr />
-        <asp:GridView ID="grdFiles" runat="server" AutoGenerateColumns="false" EmptyDataText = "No files uploaded">
-            <Columns>
-                <asp:BoundField DataField="Text" HeaderText="File Name" />
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:LinkButton ID="lnkDownload" Text = "Download" CommandArgument = '<%# Eval("Value") %>' runat="server" OnClick = "DownloadFile"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:LinkButton ID = "lnkDelete" Text = "Delete" CommandArgument = '<%# Eval("Value") %>' runat = "server" OnClick = "DeleteFile" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:LinkButton ID = "lnkView" Text = "View" CommandArgument = '<%# Eval("Value") %>' runat = "server" OnClick = "ViewFile" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
-        <asp:Button ID="btnMerge" OnClick="btnMerge_OnClick" runat="server" Text="Merge Data" />
     </div>
         <br />
         <br />
     <div>
-         <asp:GridView ID="csvUploadResults" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
-             <AlternatingRowStyle BackColor="White" />
-             <EditRowStyle BackColor="#2461BF" />
-             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-             <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-             <RowStyle BackColor="#EFF3FB" />
-             <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-             <SortedAscendingCellStyle BackColor="#F5F7FB" />
-             <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-             <SortedDescendingCellStyle BackColor="#E9EBEF" />
-             <SortedDescendingHeaderStyle BackColor="#4870BE" />
-         </asp:GridView>
         <br />
+         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+             <ContentTemplate>
+<br />
+                 <asp:GridView ID="grdFiles" runat="server" AutoGenerateColumns="false" EmptyDataText="No files uploaded">
+                     <Columns>
+                         <asp:BoundField DataField="Text" HeaderText="File Name" />
+                         <asp:TemplateField>
+                             <ItemTemplate>
+                                 <asp:LinkButton ID="lnkDownload" runat="server" CommandArgument='<%# Eval("Value") %>' OnClick="DownloadFile" Text="Download"></asp:LinkButton>
+                             </ItemTemplate>
+                         </asp:TemplateField>
+                         <asp:TemplateField>
+                             <ItemTemplate>
+                                 <asp:LinkButton ID="lnkDelete" runat="server" CommandArgument='<%# Eval("Value") %>' OnClick="DeleteFile" Text="Delete" />
+                             </ItemTemplate>
+                         </asp:TemplateField>
+                         <asp:TemplateField>
+                             <ItemTemplate>
+                                 <asp:LinkButton ID="lnkView" runat="server" CommandArgument='<%# Eval("Value") %>' OnClick="ViewFile" Text="View" />
+                             </ItemTemplate>
+                         </asp:TemplateField>
+                     </Columns>
+                 </asp:GridView>
+<br />
+<br />
+<br />
+                 <asp:Button ID="btnMerge" runat="server" OnClick="btnMerge_OnClick" Text="Merge Data" />
+<br />
+<br />
+                 <asp:GridView ID="csvUploadResults" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+                     <AlternatingRowStyle BackColor="White" />
+                     <EditRowStyle BackColor="#2461BF" />
+                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                     <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                     <RowStyle BackColor="#EFF3FB" />
+                     <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                     <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                     <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                     <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                     <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                 </asp:GridView>
+<br />
+<br />
+<br />
+             </ContentTemplate>
+         </asp:UpdatePanel>
         <br />
          <strong>Create Combo Chart from data:
          <br />
@@ -64,11 +77,11 @@
         <br />
         Select Y Axis 1 column (enter column number)
         <br />
-        <asp:TextBox runat="server" ID ="txtYAxis" Width="16px"></asp:TextBox>
+        <asp:TextBox runat="server" ID ="txtYAxis1" Width="16px"></asp:TextBox>
         <br />
         Select Y Axis 2 column (enter column number)
         <br />
-        <asp:TextBox runat="server" ID ="TextBox1" Width="16px"></asp:TextBox>
+        <asp:TextBox runat="server" ID ="txtYAxis2" Width="16px"></asp:TextBox>
         <br />
         <asp:Button runat="server" ID="btnPlot" Text="plot" OnClick="btnPlot_OnCLick" />
         <br />
@@ -91,6 +104,8 @@
           <div style="width: auto;height:auto; overflow: auto;overflow-y: hidden;">
               <div id="myChart"></div>
           </div>
+
+
  
         <script type="text/javascript">
 

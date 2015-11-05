@@ -21,6 +21,7 @@ namespace NetaWeb
         public BBandPassRate[] allBBPassRates;
         public AuthorityPop_SyncSpeed[] allAuthoritySpeedItems;
         public AuthorityEmployment_Speed[] allEmploymentSpeedItems;
+        public DataTable mergedTables = new DataTable();
 
         private static decimal apbCorrelation;
         private static decimal bbprCorrelation;
@@ -45,7 +46,7 @@ namespace NetaWeb
             csvUploadResults.DataSource = myTable;
             csvUploadResults.DataBind();
 
-            MakeChart();
+           // MakeChart();
 
             /*
             AveragePerformanceInFiveGCSEs_Average_BBand_ByCounty();
@@ -564,14 +565,86 @@ namespace NetaWeb
          
         protected void btnPlot_OnCLick(object sender, EventArgs e)
         {
+            int xAxis = Int32.Parse(txtXAxis.Text);
+            int yAxis1 = Int32.Parse(txtYAxis1.Text);
+            int yAxis2 = Int32.Parse(txtYAxis2.Text);
 
+
+            MakeComboChart(xAxis, yAxis1, yAxis2);
+        }
+
+        private void MakeComboChart(int xAxis, int yAxis1, int yAxis2)
+        {
+
+            List<string> filepaths = new List<string>();
+            List<DataTable> allTables = new List<DataTable>();
+
+            int rowCount = grdFiles.Rows.Count;
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                string filename = grdFiles.Rows[i].Cells[0].Text;
+                filepaths.Add(Server.MapPath("~/Uploads/") + filename);
+            }
+
+            foreach (string path in filepaths)
+            {
+                DataTable dt = new DataTable();
+                dt = GetDataTableFromCsv(path, true);
+                allTables.Add(dt);
+            }
+
+            mergedTables = MergeData(allTables.ElementAt(0), allTables.ElementAt(1));
+
+            StringBuilder str = new StringBuilder();
+
+            str.Append(@"<script type = 'text/javascript'>
+                      google.load('visualization', '1', { packages: ['corechart']});
+            
+                      function drawVisualization() {
+                      var data = google.visualization.arrayToDataTable([
+                       ['SchoolName','PercentPassed','AverageSpeed'],");
+
+            int count = mergedTables.Rows.Count - 1;
+
+            for (int i = 0; i <= count; i++)
+            {
+                if (count == i)
+                {
+                    str.Append("['"
+                        + mergedTables.Rows[i]["SchoolName"].ToString()
+                        + "',"
+                        + mergedTables.Rows[i]["PassRate"].ToString()
+                        + ","
+                        + mergedTables.Rows[i]["AverageSpeed"].ToString()
+                        + "]]);");
+                }
+                else
+                {
+                    str.Append("['"
+                        + mergedTables.Rows[i]["SchoolName"].ToString()
+                        + "',"
+                         + mergedTables.Rows[i]["PassRate"].ToString()
+                        + ","
+                        + mergedTables.Rows[i]["AverageSpeed"].ToString()
+                        + "],");
+                }
+            }
+
+
+            str.Append("var options = {vAxes: {0: { format: ''},1: { format: '##'}},hAxis: { title: 'Week', format: 'm/d/y'},seriesType: 'bars',series:{ 0:{ type: 'bars', targetAxisIndex: 0 }, 1: { type: 'line', targetAxisIndex: 1}}, };");
+
+            str.Append(@"var chart = new google.visualization.ComboChart(document.getElementById('myChart'));  
+                         chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
+
+            chartLit.Text = str.ToString() + "</script>";
         }
 
         protected void btnMerge_OnClick(object sender, EventArgs e)
         {
             List<string> filepaths = new List<string>();
             List<DataTable> allTables = new List<DataTable>();
-            DataTable mergedTables = new DataTable();
+            
             int rowCount = grdFiles.Rows.Count;
             
             for (int i = 0; i < rowCount; i++)
