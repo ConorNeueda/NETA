@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetaDAL" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetaDAL" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfaverage_performance_broadband">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="average_performance_broadband" nillable="true" type="tns:average_performance_broadband" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfaverage_performance_broadband" nillable="true" type="tns:ArrayOfaverage_performance_broadband" />
+  <xs:complexType name="average_performance_broadband">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Average_Pass_of_5_GCSES" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Average_Speed_mbps" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="county_id_fk" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="average_performance_broadband" nillable="true" type="tns:average_performance_broadband" />
+</xs:schema>

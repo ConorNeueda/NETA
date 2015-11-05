@@ -22,11 +22,12 @@
     <MetadataSource Address="http://localhost:65118/NetaServices.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="NetaServices2.xsd" MetadataType="Schema" ID="d056aadd-dc09-40a0-9bd1-d44bbbff4990" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd1" />
+    <MetadataFile FileName="NetaServices1.xsd" MetadataType="Schema" ID="2cc97098-6001-4a2e-ac06-9c7233e2d9a2" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd0" />
+    <MetadataFile FileName="NetaServices.xsd" MetadataType="Schema" ID="68f3af68-12cb-4d4f-ad94-45c0ad501285" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd2" />
     <MetadataFile FileName="NetaServices.disco" MetadataType="Disco" ID="65e40e39-6b53-4adc-8070-8ab79f16b239" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?disco" />
     <MetadataFile FileName="NetaServices.wsdl" MetadataType="Wsdl" ID="e188e356-a569-445a-bf5d-0fdf7de5134e" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?wsdl" />
-    <MetadataFile FileName="NetaServices.xsd" MetadataType="Schema" ID="68f3af68-12cb-4d4f-ad94-45c0ad501285" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd2" />
-    <MetadataFile FileName="NetaServices1.xsd" MetadataType="Schema" ID="2cc97098-6001-4a2e-ac06-9c7233e2d9a2" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd0" />
-    <MetadataFile FileName="NetaServices2.xsd" MetadataType="Schema" ID="d056aadd-dc09-40a0-9bd1-d44bbbff4990" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd1" />
+    <MetadataFile FileName="NetaServices3.xsd" MetadataType="Schema" ID="fe44c317-0b99-48c3-923d-6d4223fe1085" SourceId="1" SourceUrl="http://localhost:65118/NetaServices.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

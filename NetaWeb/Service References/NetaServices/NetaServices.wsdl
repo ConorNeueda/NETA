@@ -5,61 +5,103 @@
       <xsd:import schemaLocation="http://localhost:65118/NetaServices.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:65118/NetaServices.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:65118/NetaServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetaService" />
+      <xsd:import schemaLocation="http://localhost:65118/NetaServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetaDAL" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="INetaService_GetData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetData" />
-  </wsdl:message>
-  <wsdl:message name="INetaService_GetData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataResponse" />
-  </wsdl:message>
   <wsdl:message name="INetaService_MyView_InputMessage">
     <wsdl:part name="parameters" element="tns:MyView" />
   </wsdl:message>
   <wsdl:message name="INetaService_MyView_OutputMessage">
     <wsdl:part name="parameters" element="tns:MyViewResponse" />
   </wsdl:message>
-  <wsdl:message name="INetaService_Coordinates_InputMessage">
-    <wsdl:part name="parameters" element="tns:Coordinates" />
+  <wsdl:message name="INetaService_getAverages_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAverages" />
   </wsdl:message>
-  <wsdl:message name="INetaService_Coordinates_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CoordinatesResponse" />
+  <wsdl:message name="INetaService_getAverages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAveragesResponse" />
   </wsdl:message>
-  <wsdl:message name="INetaService_GetDataUsingDataContract_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  <wsdl:message name="INetaService_getUptakeByAuthority_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUptakeByAuthority" />
   </wsdl:message>
-  <wsdl:message name="INetaService_GetDataUsingDataContract_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  <wsdl:message name="INetaService_getUptakeByAuthority_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUptakeByAuthorityResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_CreateSpearmansRankTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSpearmansRankTable" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_CreateSpearmansRankTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSpearmansRankTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetAuthorityEmployment_Speed_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthorityEmployment_Speed" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetAuthorityEmployment_Speed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthorityEmployment_SpeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetSchoolPR_BroadbandCorrelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchoolPR_BroadbandCorrelation" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetSchoolPR_BroadbandCorrelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchoolPR_BroadbandCorrelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetCountyAveragePerformance_BroadbandCorrelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountyAveragePerformance_BroadbandCorrelation" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetCountyAveragePerformance_BroadbandCorrelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountyAveragePerformance_BroadbandCorrelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetAuthorityPop_SyncSpeedCorrelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthorityPop_SyncSpeedCorrelation" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetAuthorityPop_SyncSpeedCorrelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthorityPop_SyncSpeedCorrelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetAuthoritySpeed_EmploymentCorrelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthoritySpeed_EmploymentCorrelation" />
+  </wsdl:message>
+  <wsdl:message name="INetaService_GetAuthoritySpeed_EmploymentCorrelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthoritySpeed_EmploymentCorrelationResponse" />
   </wsdl:message>
   <wsdl:portType name="INetaService">
-    <wsdl:operation name="GetData">
-      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetData" message="tns:INetaService_GetData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/GetDataResponse" message="tns:INetaService_GetData_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="MyView">
       <wsdl:input wsaw:Action="http://tempuri.org/INetaService/MyView" message="tns:INetaService_MyView_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INetaService/MyViewResponse" message="tns:INetaService_MyView_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Coordinates">
-      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/Coordinates" message="tns:INetaService_Coordinates_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/CoordinatesResponse" message="tns:INetaService_Coordinates_OutputMessage" />
+    <wsdl:operation name="getAverages">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/getAverages" message="tns:INetaService_getAverages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/getAveragesResponse" message="tns:INetaService_getAverages_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetDataUsingDataContract" message="tns:INetaService_GetDataUsingDataContract_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/GetDataUsingDataContractResponse" message="tns:INetaService_GetDataUsingDataContract_OutputMessage" />
+    <wsdl:operation name="getUptakeByAuthority">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/getUptakeByAuthority" message="tns:INetaService_getUptakeByAuthority_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/getUptakeByAuthorityResponse" message="tns:INetaService_getUptakeByAuthority_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSpearmansRankTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/CreateSpearmansRankTable" message="tns:INetaService_CreateSpearmansRankTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/CreateSpearmansRankTableResponse" message="tns:INetaService_CreateSpearmansRankTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthorityEmployment_Speed">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetAuthorityEmployment_Speed" message="tns:INetaService_GetAuthorityEmployment_Speed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/GetAuthorityEmployment_SpeedResponse" message="tns:INetaService_GetAuthorityEmployment_Speed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolPR_BroadbandCorrelation">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetSchoolPR_BroadbandCorrelation" message="tns:INetaService_GetSchoolPR_BroadbandCorrelation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/GetSchoolPR_BroadbandCorrelationResponse" message="tns:INetaService_GetSchoolPR_BroadbandCorrelation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAveragePerformance_BroadbandCorrelation">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetCountyAveragePerformance_BroadbandCorrelation" message="tns:INetaService_GetCountyAveragePerformance_BroadbandCorrelation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/GetCountyAveragePerformance_BroadbandCorrelationResponse" message="tns:INetaService_GetCountyAveragePerformance_BroadbandCorrelation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthorityPop_SyncSpeedCorrelation">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetAuthorityPop_SyncSpeedCorrelation" message="tns:INetaService_GetAuthorityPop_SyncSpeedCorrelation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/GetAuthorityPop_SyncSpeedCorrelationResponse" message="tns:INetaService_GetAuthorityPop_SyncSpeedCorrelation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthoritySpeed_EmploymentCorrelation">
+      <wsdl:input wsaw:Action="http://tempuri.org/INetaService/GetAuthoritySpeed_EmploymentCorrelation" message="tns:INetaService_GetAuthoritySpeed_EmploymentCorrelation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INetaService/GetAuthoritySpeed_EmploymentCorrelationResponse" message="tns:INetaService_GetAuthoritySpeed_EmploymentCorrelation_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_INetaService" type="tns:INetaService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetData">
-      <soap:operation soapAction="http://tempuri.org/INetaService/GetData" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MyView">
       <soap:operation soapAction="http://tempuri.org/INetaService/MyView" style="document" />
       <wsdl:input>
@@ -69,8 +111,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Coordinates">
-      <soap:operation soapAction="http://tempuri.org/INetaService/Coordinates" style="document" />
+    <wsdl:operation name="getAverages">
+      <soap:operation soapAction="http://tempuri.org/INetaService/getAverages" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -78,8 +120,62 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <soap:operation soapAction="http://tempuri.org/INetaService/GetDataUsingDataContract" style="document" />
+    <wsdl:operation name="getUptakeByAuthority">
+      <soap:operation soapAction="http://tempuri.org/INetaService/getUptakeByAuthority" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSpearmansRankTable">
+      <soap:operation soapAction="http://tempuri.org/INetaService/CreateSpearmansRankTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthorityEmployment_Speed">
+      <soap:operation soapAction="http://tempuri.org/INetaService/GetAuthorityEmployment_Speed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchoolPR_BroadbandCorrelation">
+      <soap:operation soapAction="http://tempuri.org/INetaService/GetSchoolPR_BroadbandCorrelation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountyAveragePerformance_BroadbandCorrelation">
+      <soap:operation soapAction="http://tempuri.org/INetaService/GetCountyAveragePerformance_BroadbandCorrelation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthorityPop_SyncSpeedCorrelation">
+      <soap:operation soapAction="http://tempuri.org/INetaService/GetAuthorityPop_SyncSpeedCorrelation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthoritySpeed_EmploymentCorrelation">
+      <soap:operation soapAction="http://tempuri.org/INetaService/GetAuthoritySpeed_EmploymentCorrelation" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

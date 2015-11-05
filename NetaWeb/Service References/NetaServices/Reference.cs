@@ -108,21 +108,24 @@ namespace NetaWeb.NetaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TopBroadbandSpeed", Namespace="http://schemas.datacontract.org/2004/07/NetaService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="average_performance_broadband", Namespace="http://schemas.datacontract.org/2004/07/NetaDAL")]
     [System.SerializableAttribute()]
-    public partial class TopBroadbandSpeed : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class average_performance_broadband : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal AverageSpeedField;
+        private System.Nullable<decimal> Average_Pass_of_5_GCSESField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal LatField;
+        private System.Nullable<decimal> Average_Speed_mbpsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal LngField;
+        private System.Nullable<int> county_id_fkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -135,40 +138,53 @@ namespace NetaWeb.NetaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal AverageSpeed {
+        public System.Nullable<decimal> Average_Pass_of_5_GCSES {
             get {
-                return this.AverageSpeedField;
+                return this.Average_Pass_of_5_GCSESField;
             }
             set {
-                if ((this.AverageSpeedField.Equals(value) != true)) {
-                    this.AverageSpeedField = value;
-                    this.RaisePropertyChanged("AverageSpeed");
+                if ((this.Average_Pass_of_5_GCSESField.Equals(value) != true)) {
+                    this.Average_Pass_of_5_GCSESField = value;
+                    this.RaisePropertyChanged("Average_Pass_of_5_GCSES");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Lat {
+        public System.Nullable<decimal> Average_Speed_mbps {
             get {
-                return this.LatField;
+                return this.Average_Speed_mbpsField;
             }
             set {
-                if ((this.LatField.Equals(value) != true)) {
-                    this.LatField = value;
-                    this.RaisePropertyChanged("Lat");
+                if ((this.Average_Speed_mbpsField.Equals(value) != true)) {
+                    this.Average_Speed_mbpsField = value;
+                    this.RaisePropertyChanged("Average_Speed_mbps");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Lng {
+        public System.Nullable<int> county_id_fk {
             get {
-                return this.LngField;
+                return this.county_id_fkField;
             }
             set {
-                if ((this.LngField.Equals(value) != true)) {
-                    this.LngField = value;
-                    this.RaisePropertyChanged("Lng");
+                if ((this.county_id_fkField.Equals(value) != true)) {
+                    this.county_id_fkField = value;
+                    this.RaisePropertyChanged("county_id_fk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
                 }
             }
         }
@@ -185,18 +201,24 @@ namespace NetaWeb.NetaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/NetaService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthorityPop_SyncSpeed", Namespace="http://schemas.datacontract.org/2004/07/NetaService")]
     [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class AuthorityPop_SyncSpeed : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
+        private string AuthorityField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
+        private System.Nullable<decimal> AverageSyncField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long PopSizeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -209,27 +231,255 @@ namespace NetaWeb.NetaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
+        public string Authority {
             get {
-                return this.BoolValueField;
+                return this.AuthorityField;
             }
             set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
+                if ((object.ReferenceEquals(this.AuthorityField, value) != true)) {
+                    this.AuthorityField = value;
+                    this.RaisePropertyChanged("Authority");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
+        public System.Nullable<decimal> AverageSync {
             get {
-                return this.StringValueField;
+                return this.AverageSyncField;
             }
             set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
+                if ((this.AverageSyncField.Equals(value) != true)) {
+                    this.AverageSyncField = value;
+                    this.RaisePropertyChanged("AverageSync");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long PopSize {
+            get {
+                return this.PopSizeField;
+            }
+            set {
+                if ((this.PopSizeField.Equals(value) != true)) {
+                    this.PopSizeField = value;
+                    this.RaisePropertyChanged("PopSize");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SpearmansRank", Namespace="http://schemas.datacontract.org/2004/07/NetaService")]
+    [System.SerializableAttribute()]
+    public partial class SpearmansRank : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CorrelationIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorrelationNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal SpearmansRhoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CorrelationID {
+            get {
+                return this.CorrelationIDField;
+            }
+            set {
+                if ((this.CorrelationIDField.Equals(value) != true)) {
+                    this.CorrelationIDField = value;
+                    this.RaisePropertyChanged("CorrelationID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CorrelationName {
+            get {
+                return this.CorrelationNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorrelationNameField, value) != true)) {
+                    this.CorrelationNameField = value;
+                    this.RaisePropertyChanged("CorrelationName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal SpearmansRho {
+            get {
+                return this.SpearmansRhoField;
+            }
+            set {
+                if ((this.SpearmansRhoField.Equals(value) != true)) {
+                    this.SpearmansRhoField = value;
+                    this.RaisePropertyChanged("SpearmansRho");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthorityEmployment_Speed", Namespace="http://schemas.datacontract.org/2004/07/NetaService")]
+    [System.SerializableAttribute()]
+    public partial class AuthorityEmployment_Speed : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuthorityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> EmploymentRankingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EmploymentRateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> SpeedRankingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal SyncSpeedField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Authority {
+            get {
+                return this.AuthorityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorityField, value) != true)) {
+                    this.AuthorityField = value;
+                    this.RaisePropertyChanged("Authority");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> EmploymentRanking {
+            get {
+                return this.EmploymentRankingField;
+            }
+            set {
+                if ((this.EmploymentRankingField.Equals(value) != true)) {
+                    this.EmploymentRankingField = value;
+                    this.RaisePropertyChanged("EmploymentRanking");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int EmploymentRate {
+            get {
+                return this.EmploymentRateField;
+            }
+            set {
+                if ((this.EmploymentRateField.Equals(value) != true)) {
+                    this.EmploymentRateField = value;
+                    this.RaisePropertyChanged("EmploymentRate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> SpeedRanking {
+            get {
+                return this.SpeedRankingField;
+            }
+            set {
+                if ((this.SpeedRankingField.Equals(value) != true)) {
+                    this.SpeedRankingField = value;
+                    this.RaisePropertyChanged("SpeedRanking");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal SyncSpeed {
+            get {
+                return this.SyncSpeedField;
+            }
+            set {
+                if ((this.SyncSpeedField.Equals(value) != true)) {
+                    this.SyncSpeedField = value;
+                    this.RaisePropertyChanged("SyncSpeed");
                 }
             }
         }
@@ -248,29 +498,61 @@ namespace NetaWeb.NetaServices {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NetaServices.INetaService")]
     public interface INetaService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetData", ReplyAction="http://tempuri.org/INetaService/GetDataResponse")]
-        string GetData(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetData", ReplyAction="http://tempuri.org/INetaService/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/MyView", ReplyAction="http://tempuri.org/INetaService/MyViewResponse")]
         NetaWeb.NetaServices.BBandPassRate[] MyView();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/MyView", ReplyAction="http://tempuri.org/INetaService/MyViewResponse")]
         System.Threading.Tasks.Task<NetaWeb.NetaServices.BBandPassRate[]> MyViewAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/Coordinates", ReplyAction="http://tempuri.org/INetaService/CoordinatesResponse")]
-        NetaWeb.NetaServices.TopBroadbandSpeed[] Coordinates();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/getAverages", ReplyAction="http://tempuri.org/INetaService/getAveragesResponse")]
+        NetaWeb.NetaServices.average_performance_broadband[] getAverages();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/Coordinates", ReplyAction="http://tempuri.org/INetaService/CoordinatesResponse")]
-        System.Threading.Tasks.Task<NetaWeb.NetaServices.TopBroadbandSpeed[]> CoordinatesAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/getAverages", ReplyAction="http://tempuri.org/INetaService/getAveragesResponse")]
+        System.Threading.Tasks.Task<NetaWeb.NetaServices.average_performance_broadband[]> getAveragesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/INetaService/GetDataUsingDataContractResponse")]
-        NetaWeb.NetaServices.CompositeType GetDataUsingDataContract(NetaWeb.NetaServices.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/getUptakeByAuthority", ReplyAction="http://tempuri.org/INetaService/getUptakeByAuthorityResponse")]
+        NetaWeb.NetaServices.AuthorityPop_SyncSpeed[] getUptakeByAuthority();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/INetaService/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<NetaWeb.NetaServices.CompositeType> GetDataUsingDataContractAsync(NetaWeb.NetaServices.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/getUptakeByAuthority", ReplyAction="http://tempuri.org/INetaService/getUptakeByAuthorityResponse")]
+        System.Threading.Tasks.Task<NetaWeb.NetaServices.AuthorityPop_SyncSpeed[]> getUptakeByAuthorityAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/CreateSpearmansRankTable", ReplyAction="http://tempuri.org/INetaService/CreateSpearmansRankTableResponse")]
+        NetaWeb.NetaServices.SpearmansRank[] CreateSpearmansRankTable();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/CreateSpearmansRankTable", ReplyAction="http://tempuri.org/INetaService/CreateSpearmansRankTableResponse")]
+        System.Threading.Tasks.Task<NetaWeb.NetaServices.SpearmansRank[]> CreateSpearmansRankTableAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetAuthorityEmployment_Speed", ReplyAction="http://tempuri.org/INetaService/GetAuthorityEmployment_SpeedResponse")]
+        NetaWeb.NetaServices.AuthorityEmployment_Speed[] GetAuthorityEmployment_Speed();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetAuthorityEmployment_Speed", ReplyAction="http://tempuri.org/INetaService/GetAuthorityEmployment_SpeedResponse")]
+        System.Threading.Tasks.Task<NetaWeb.NetaServices.AuthorityEmployment_Speed[]> GetAuthorityEmployment_SpeedAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetSchoolPR_BroadbandCorrelation", ReplyAction="http://tempuri.org/INetaService/GetSchoolPR_BroadbandCorrelationResponse")]
+        decimal GetSchoolPR_BroadbandCorrelation();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetSchoolPR_BroadbandCorrelation", ReplyAction="http://tempuri.org/INetaService/GetSchoolPR_BroadbandCorrelationResponse")]
+        System.Threading.Tasks.Task<decimal> GetSchoolPR_BroadbandCorrelationAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetCountyAveragePerformance_BroadbandCorrelation", ReplyAction="http://tempuri.org/INetaService/GetCountyAveragePerformance_BroadbandCorrelationR" +
+            "esponse")]
+        decimal GetCountyAveragePerformance_BroadbandCorrelation();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetCountyAveragePerformance_BroadbandCorrelation", ReplyAction="http://tempuri.org/INetaService/GetCountyAveragePerformance_BroadbandCorrelationR" +
+            "esponse")]
+        System.Threading.Tasks.Task<decimal> GetCountyAveragePerformance_BroadbandCorrelationAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetAuthorityPop_SyncSpeedCorrelation", ReplyAction="http://tempuri.org/INetaService/GetAuthorityPop_SyncSpeedCorrelationResponse")]
+        decimal GetAuthorityPop_SyncSpeedCorrelation();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetAuthorityPop_SyncSpeedCorrelation", ReplyAction="http://tempuri.org/INetaService/GetAuthorityPop_SyncSpeedCorrelationResponse")]
+        System.Threading.Tasks.Task<decimal> GetAuthorityPop_SyncSpeedCorrelationAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetAuthoritySpeed_EmploymentCorrelation", ReplyAction="http://tempuri.org/INetaService/GetAuthoritySpeed_EmploymentCorrelationResponse")]
+        decimal GetAuthoritySpeed_EmploymentCorrelation();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INetaService/GetAuthoritySpeed_EmploymentCorrelation", ReplyAction="http://tempuri.org/INetaService/GetAuthoritySpeed_EmploymentCorrelationResponse")]
+        System.Threading.Tasks.Task<decimal> GetAuthoritySpeed_EmploymentCorrelationAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -300,14 +582,6 @@ namespace NetaWeb.NetaServices {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
-        }
-        
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
-        }
-        
         public NetaWeb.NetaServices.BBandPassRate[] MyView() {
             return base.Channel.MyView();
         }
@@ -316,20 +590,68 @@ namespace NetaWeb.NetaServices {
             return base.Channel.MyViewAsync();
         }
         
-        public NetaWeb.NetaServices.TopBroadbandSpeed[] Coordinates() {
-            return base.Channel.Coordinates();
+        public NetaWeb.NetaServices.average_performance_broadband[] getAverages() {
+            return base.Channel.getAverages();
         }
         
-        public System.Threading.Tasks.Task<NetaWeb.NetaServices.TopBroadbandSpeed[]> CoordinatesAsync() {
-            return base.Channel.CoordinatesAsync();
+        public System.Threading.Tasks.Task<NetaWeb.NetaServices.average_performance_broadband[]> getAveragesAsync() {
+            return base.Channel.getAveragesAsync();
         }
         
-        public NetaWeb.NetaServices.CompositeType GetDataUsingDataContract(NetaWeb.NetaServices.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
+        public NetaWeb.NetaServices.AuthorityPop_SyncSpeed[] getUptakeByAuthority() {
+            return base.Channel.getUptakeByAuthority();
         }
         
-        public System.Threading.Tasks.Task<NetaWeb.NetaServices.CompositeType> GetDataUsingDataContractAsync(NetaWeb.NetaServices.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
+        public System.Threading.Tasks.Task<NetaWeb.NetaServices.AuthorityPop_SyncSpeed[]> getUptakeByAuthorityAsync() {
+            return base.Channel.getUptakeByAuthorityAsync();
+        }
+        
+        public NetaWeb.NetaServices.SpearmansRank[] CreateSpearmansRankTable() {
+            return base.Channel.CreateSpearmansRankTable();
+        }
+        
+        public System.Threading.Tasks.Task<NetaWeb.NetaServices.SpearmansRank[]> CreateSpearmansRankTableAsync() {
+            return base.Channel.CreateSpearmansRankTableAsync();
+        }
+        
+        public NetaWeb.NetaServices.AuthorityEmployment_Speed[] GetAuthorityEmployment_Speed() {
+            return base.Channel.GetAuthorityEmployment_Speed();
+        }
+        
+        public System.Threading.Tasks.Task<NetaWeb.NetaServices.AuthorityEmployment_Speed[]> GetAuthorityEmployment_SpeedAsync() {
+            return base.Channel.GetAuthorityEmployment_SpeedAsync();
+        }
+        
+        public decimal GetSchoolPR_BroadbandCorrelation() {
+            return base.Channel.GetSchoolPR_BroadbandCorrelation();
+        }
+        
+        public System.Threading.Tasks.Task<decimal> GetSchoolPR_BroadbandCorrelationAsync() {
+            return base.Channel.GetSchoolPR_BroadbandCorrelationAsync();
+        }
+        
+        public decimal GetCountyAveragePerformance_BroadbandCorrelation() {
+            return base.Channel.GetCountyAveragePerformance_BroadbandCorrelation();
+        }
+        
+        public System.Threading.Tasks.Task<decimal> GetCountyAveragePerformance_BroadbandCorrelationAsync() {
+            return base.Channel.GetCountyAveragePerformance_BroadbandCorrelationAsync();
+        }
+        
+        public decimal GetAuthorityPop_SyncSpeedCorrelation() {
+            return base.Channel.GetAuthorityPop_SyncSpeedCorrelation();
+        }
+        
+        public System.Threading.Tasks.Task<decimal> GetAuthorityPop_SyncSpeedCorrelationAsync() {
+            return base.Channel.GetAuthorityPop_SyncSpeedCorrelationAsync();
+        }
+        
+        public decimal GetAuthoritySpeed_EmploymentCorrelation() {
+            return base.Channel.GetAuthoritySpeed_EmploymentCorrelation();
+        }
+        
+        public System.Threading.Tasks.Task<decimal> GetAuthoritySpeed_EmploymentCorrelationAsync() {
+            return base.Channel.GetAuthoritySpeed_EmploymentCorrelationAsync();
         }
     }
 }

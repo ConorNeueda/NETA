@@ -15,25 +15,50 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BBandPassRate" nillable="true" type="tns:BBandPassRate" />
-  <xs:complexType name="ArrayOfTopBroadbandSpeed">
+  <xs:complexType name="ArrayOfAuthorityPop_SyncSpeed">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="TopBroadbandSpeed" nillable="true" type="tns:TopBroadbandSpeed" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AuthorityPop_SyncSpeed" nillable="true" type="tns:AuthorityPop_SyncSpeed" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfTopBroadbandSpeed" nillable="true" type="tns:ArrayOfTopBroadbandSpeed" />
-  <xs:complexType name="TopBroadbandSpeed">
+  <xs:element name="ArrayOfAuthorityPop_SyncSpeed" nillable="true" type="tns:ArrayOfAuthorityPop_SyncSpeed" />
+  <xs:complexType name="AuthorityPop_SyncSpeed">
     <xs:sequence>
-      <xs:element minOccurs="0" name="AverageSpeed" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Lat" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Lng" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Authority" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AverageSync" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="PopSize" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="TopBroadbandSpeed" nillable="true" type="tns:TopBroadbandSpeed" />
-  <xs:complexType name="CompositeType">
+  <xs:element name="AuthorityPop_SyncSpeed" nillable="true" type="tns:AuthorityPop_SyncSpeed" />
+  <xs:complexType name="ArrayOfSpearmansRank">
     <xs:sequence>
-      <xs:element minOccurs="0" name="BoolValue" type="xs:boolean" />
-      <xs:element minOccurs="0" name="StringValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SpearmansRank" nillable="true" type="tns:SpearmansRank" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
+  <xs:element name="ArrayOfSpearmansRank" nillable="true" type="tns:ArrayOfSpearmansRank" />
+  <xs:complexType name="SpearmansRank">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CorrelationID" type="xs:int" />
+      <xs:element minOccurs="0" name="CorrelationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SpearmansRho" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SpearmansRank" nillable="true" type="tns:SpearmansRank" />
+  <xs:complexType name="ArrayOfAuthorityEmployment_Speed">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AuthorityEmployment_Speed" nillable="true" type="tns:AuthorityEmployment_Speed" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAuthorityEmployment_Speed" nillable="true" type="tns:ArrayOfAuthorityEmployment_Speed" />
+  <xs:complexType name="AuthorityEmployment_Speed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Authority" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmploymentRanking" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="EmploymentRate" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="SpeedRanking" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SyncSpeed" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthorityEmployment_Speed" nillable="true" type="tns:AuthorityEmployment_Speed" />
 </xs:schema>
