@@ -9,7 +9,6 @@ using NetaDAL;
 
 namespace NetaService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface INetaService
     {
@@ -50,7 +49,6 @@ namespace NetaService
             AverageSpeed = (decimal)myView.average_speed_mbps;
             PassRate = (decimal)myView.percent_5_pass_grades_gcse;
             SchoolName = myView.school_name;
-
         }
 
         public BBandPassRate()
@@ -67,8 +65,6 @@ namespace NetaService
         public string SchoolName { get; set; }
     }
 
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
     public class AuthorityPop_SyncSpeed
     {
@@ -136,11 +132,9 @@ namespace NetaService
 
     }
 
-
     [DataContract]
     public class SpearmansRank
     {
-
         public SpearmansRank(NetaDAL.spearmans_ranks myTable)
         {
             CorrelationID = myTable.correlation_id;
@@ -187,7 +181,6 @@ namespace NetaService
 
         [DataMember]
         public decimal? AverageSpeed { get; set; }
-
 
         [DataMember]
         public decimal? AveragePass { get; set; }
