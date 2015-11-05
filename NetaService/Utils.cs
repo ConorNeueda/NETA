@@ -57,7 +57,6 @@ class Utils
         ret.CorrelationID = table.correlation_id;
         ret.CorrelationName = table.correlation_name;
         ret.SpearmansRho = table.spearmans_rho;
-
         return ret;
     }
 }
