@@ -11,9 +11,6 @@
     <div>
         <br />
         <br />
-        <br />
-        <br />
-        <br />
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="UploadFile" />
         <hr />
@@ -57,14 +54,21 @@
          </asp:GridView>
         <br />
         <br />
+         <strong>Create Combo Chart from data:
+         <br />
+         </strong>
         <br />
         Select X Axis column (enter column number)
         <br />
-        <asp:TextBox runat="server" ID ="txtXAxis"></asp:TextBox>
+        <asp:TextBox runat="server" ID ="txtXAxis" Width="16px"></asp:TextBox>
         <br />
-        Select Y Axis column (enter column number)
+        Select Y Axis 1 column (enter column number)
         <br />
-        <asp:TextBox runat="server" ID ="txtYAxis"></asp:TextBox>
+        <asp:TextBox runat="server" ID ="txtYAxis" Width="16px"></asp:TextBox>
+        <br />
+        Select Y Axis 2 column (enter column number)
+        <br />
+        <asp:TextBox runat="server" ID ="TextBox1" Width="16px"></asp:TextBox>
         <br />
         <asp:Button runat="server" ID="btnPlot" Text="plot" OnClick="btnPlot_OnCLick" />
         <br />
@@ -73,14 +77,7 @@
 </div>
 <br />
 <br />
-
-
-          <div style="width: 600px;height:auto; overflow: auto;overflow-y: hidden;">
-              <div id="chart_div"></div>
-           </div>
-
     <html>
-
     <head>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -90,7 +87,11 @@
     </head>
 
     <body>
-
+          <asp:Literal ID="chartLit" runat="server"></asp:Literal>
+          <div style="width: auto;height:auto; overflow: auto;overflow-y: hidden;">
+              <div id="myChart"></div>
+          </div>
+ 
         <script type="text/javascript">
 
             jQuery(document).ready(function () {
@@ -119,7 +120,10 @@
             })
 
         </script>
-        <asp:Literal ID="lt" runat="server"></asp:Literal>
+        
+        <asp:Literal ID="authPopSpeed" runat="server"></asp:Literal>
+        <asp:Literal ID="authEmpSyncSpeed" runat="server"></asp:Literal>
+        
         <!-- Header -->
         <div class="container">
             <header>

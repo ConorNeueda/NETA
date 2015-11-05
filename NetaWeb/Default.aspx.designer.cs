@@ -76,6 +76,15 @@ namespace NetaWeb {
         protected global::System.Web.UI.WebControls.TextBox txtYAxis;
         
         /// <summary>
+        /// TextBox1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        
+        /// <summary>
         /// btnPlot control.
         /// </summary>
         /// <remarks>
@@ -85,13 +94,31 @@ namespace NetaWeb {
         protected global::System.Web.UI.WebControls.Button btnPlot;
         
         /// <summary>
-        /// lt control.
+        /// chartLit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal lt;
+        protected global::System.Web.UI.WebControls.Literal chartLit;
+        
+        /// <summary>
+        /// authPopSpeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal authPopSpeed;
+        
+        /// <summary>
+        /// authEmpSyncSpeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal authEmpSyncSpeed;
         
         /// <summary>
         /// mapLit control.

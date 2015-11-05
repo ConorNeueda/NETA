@@ -9,18 +9,24 @@ using System.IO;
 using System.Web;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
+using System.Web.Script.Serialization;
+using System.Linq;
 
 namespace NetaWeb
 
 {
     public partial class _Default : Page
     {
-        private static average_performance_broadband[] allItems;
-        private static BBandPassRate[] allBBandPRItems;
-        private static AuthorityPop_SyncSpeed[] allAuthoritySpeedItems;
-        private static AuthorityEmployment_Speed[] allEmploymentSpeedItems;
-        private static SpearmansRank[] allSRItems;
-        
+        public average_performance_broadband[] allAPBItems;
+        public BBandPassRate[] allBBPassRates;
+        public AuthorityPop_SyncSpeed[] allAuthoritySpeedItems;
+        public AuthorityEmployment_Speed[] allEmploymentSpeedItems;
+
+        private static decimal apbCorrelation;
+        private static decimal bbprCorrelation;
+        private static decimal apssCorrelation;
+        private static decimal aesCorrelation;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable myTable = new DataTable();
@@ -39,16 +45,14 @@ namespace NetaWeb
             csvUploadResults.DataSource = myTable;
             csvUploadResults.DataBind();
 
-            //string path = "C:\\test.csv";
-
-            
-
-            
-
-            grdMyGrid.DataSource = myTable;
-            grdMyGrid.DataBind();
-
             MakeChart();
+
+            /*
+            AveragePerformanceInFiveGCSEs_Average_BBand_ByCounty();
+            AuthorityPopulation_SyncSpeed();
+            AuthorityEmployment_SyncSpeed();
+            BindCorrelationToLabels();
+            */
         }
 
         static DataTable GetDataTableFromCsv(string path, bool isFirstRowHeader)
@@ -223,18 +227,33 @@ namespace NetaWeb
         {
             DataTable dt = new DataTable();
 
+            dt.Columns.Add("CorrelationID");
+            dt.Columns.Add("CorrelationName");
+            dt.Columns.Add("SpearmansRho");
+
+            foreach (var item in list)
+            {
+                var row = dt.NewRow();
+
+                row["CorrelationID"] = item.CorrelationID;
+                row["CorrelationName"] = item.CorrelationName;
+                row["SpearmansRho"] = item.SpearmansRho;
+
+                dt.Rows.Add(row);
+            }
+
+            return dt;
+        }
+
         public  void MakeChart()
         {
             using (NetaServiceClient proxy = new NetaServiceClient())
             {
-                allItems = proxy.MyView();
+                allBBPassRates = proxy.MyView();
             }
 
             DataTable dt = new DataTable();
-
-            dt = ConvertToDatatable(allItems);
-
-
+            dt = ConvertToDatatable(allBBPassRates);
             StringBuilder str = new StringBuilder();
 
             str.Append(@"<script type = 'text/javascript'>
@@ -273,24 +292,24 @@ namespace NetaWeb
 
             str.Append("var options = {vAxes: {0: { format: ''},1: { format: '##'}},hAxis: { title: 'Week', format: 'm/d/y'},seriesType: 'bars',series:{ 0:{ type: 'bars', targetAxisIndex: 0 }, 1: { type: 'line', targetAxisIndex: 1}}, };");
 
-            str.Append(@"var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));  
+            str.Append(@"var chart = new google.visualization.ComboChart(document.getElementById('myChart'));  
                          chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
-            lt.Text = str.ToString() + "</script>";
-        
+            chartLit.Text = str.ToString() + "</script>";
+
         }
 
         public void AveragePerformanceInFiveGCSEs_Average_BBand_ByCounty()
         {
             using (NetaServiceClient proxy = new NetaServiceClient())
             {
-                allItems = proxy.getAverages();
+                allAPBItems = proxy.getAverages();
                 var serilizer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
             }
 
             DataTable dt = new DataTable();
-            dt = ConvertToDatatable(allItems);
+            dt = ConvertToDatatable(allAPBItems);
 
             StringBuilder str = new StringBuilder();
 
@@ -331,7 +350,7 @@ namespace NetaWeb
 
             str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_1')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
-            Literal1.Text = str.ToString() + "</script>";
+            //lt.Text = str.ToString() + "</script>";
         }//AvgPerformance_Bband_ByCounty
 
         public void AuthorityPopulation_SyncSpeed()
@@ -384,7 +403,7 @@ namespace NetaWeb
 
             str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_2')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
-            Literal2.Text = str.ToString() + "</script>";
+            authPopSpeed.Text = str.ToString() + "</script>";
         }//AvgPop_SyncSpeed
 
         public void AuthorityEmployment_SyncSpeed()//AuthorityEmployment_SyncSpeed
@@ -437,7 +456,7 @@ namespace NetaWeb
 
             str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_3')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
-            Literal3.Text = str.ToString() + "</script>";
+            authEmpSyncSpeed.Text = str.ToString() + "</script>";
         }
 
         public static string Serialize(object o)
@@ -486,37 +505,12 @@ namespace NetaWeb
             return aesCorrelation;
         }
 
-        //BIND DATATABLE TO GRIDVIEW ITEMS
-
-        private void BindGVData()
-        {
-            using (NetaServiceClient proxy = new NetaServiceClient())
-            {
-                average_performance_broadband[] allItems = proxy.getAverages();
-
-                Grid1D.DataSource = allItems;
-                Grid1D.DataBind();
-
-            }
-        }
-
-        private void BindSpearmansToGridview()
-        {
-            using (NetaServiceClient proxy = new NetaServiceClient())
-            {
-                SpearmansRank[] allItems = proxy.CreateSpearmansRankTable();
-
-                Grid1D.DataSource = allItems;
-                Grid1D.DataBind();
-            }
-        }
-
         private void BindCorrelationToLabels()
         {
-            APBLabel.Text = GetApbCorrelation().ToString();
-            BbprLabel.Text = GetBbprCorrelation().ToString();
-            ApssLabel.Text = GetApssCorrelation().ToString();
-            AesLabel.Text = GetAesCorrelation().ToString();
+            //APBLabel.Text = GetApbCorrelation().ToString();
+            //BbprLabel.Text = GetBbprCorrelation().ToString();
+            //ApssLabel.Text = GetApssCorrelation().ToString();
+            //AesLabel.Text = GetAesCorrelation().ToString();
         }
 
         //METHODS ASSOCIATED WITH FILE UPLOADS
@@ -582,8 +576,8 @@ namespace NetaWeb
             
             for (int i = 0; i < rowCount; i++)
             {
-                string y = grdFiles.Rows[i].Cells[0].Text;
-                filepaths.Add(Server.MapPath("~/Uploads/") + y);
+                string filename = grdFiles.Rows[i].Cells[0].Text;
+                filepaths.Add(Server.MapPath("~/Uploads/") + filename);
             }
 
             foreach(string path in filepaths)
@@ -593,12 +587,21 @@ namespace NetaWeb
                 allTables.Add(dt);
             }
 
-            foreach(DataTable datatable in allTables)
-            {
-                mergedTables.Merge(datatable);
-            }
+            mergedTables = MergeData(allTables.ElementAt(0), allTables.ElementAt(1));
             csvUploadResults.DataSource = mergedTables;
             csvUploadResults.DataBind();
+        }
+
+        public DataTable MergeData(DataTable dtFirst, DataTable dtSecond)
+        {
+            dtFirst.Columns.Add("LocalAuthority");
+            dtFirst.Columns.Add("AverageSpeed");
+            for (int i = 0; i < dtFirst.Rows.Count; i++)
+            {
+                dtFirst.Rows[i]["LocalAuthority"] = dtSecond.Rows[i]["LocalAuthority"];
+                dtFirst.Rows[i]["AverageSpeed"] = dtSecond.Rows[i]["AverageSpeed"];
+            }
+            return dtFirst;
         }
     }
 }
