@@ -23,10 +23,10 @@ namespace NetaService
         List<AuthorityPop_SyncSpeed> getUptakeByAuthority();
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        List<SpearmansRank> CreateSpearmansRankTable();
 
         [OperationContract]
-        List<SpearmansRank> CreateSpearmansRankTable();
+        List<AuthorityEmployment_Speed> GetAuthorityEmployment_Speed();
 
         [OperationContract]
         decimal GetSchoolPR_BroadbandCorrelation();
@@ -72,7 +72,7 @@ namespace NetaService
     [DataContract]
     public class AuthorityPop_SyncSpeed
     {
-        public AuthorityPop_SyncSpeed(NetaClassLib.la_pop_speed_ranked rankedTable)
+        public AuthorityPop_SyncSpeed(NetaDAL.la_pop_speed_ranked rankedTable)
         {
             ID = rankedTable.id;
             Authority = rankedTable.authority;
@@ -101,7 +101,7 @@ namespace NetaService
     [DataContract]
     public class AuthorityEmployment_Speed
     {
-        public AuthorityEmployment_Speed(NetaClassLib.authority_employment_syncspeed_rankings table)
+        public AuthorityEmployment_Speed(NetaDAL.authority_employment_syncspeed_rankings table)
         {
             ID = table.authority_id;
             Authority = table.authority_name;
@@ -136,11 +136,12 @@ namespace NetaService
 
     }
 
+
     [DataContract]
     public class SpearmansRank
     {
 
-        public SpearmansRank(NetaClassLib.spearmans_ranks myTable)
+        public SpearmansRank(NetaDAL.spearmans_ranks myTable)
         {
             CorrelationID = myTable.correlation_id;
             CorrelationName = myTable.correlation_name;
@@ -160,6 +161,36 @@ namespace NetaService
 
         [DataMember]
         public decimal SpearmansRho { get; set; }
+    }
+
+    [DataContract]
+    public class AverageSpeed_AveragePass_County
+    {
+        public AverageSpeed_AveragePass_County(NetaDAL.average_performance_broadband apb)
+        {
+            Id = apb.id;
+            CountyID = apb.county_id_fk;
+            AverageSpeed = apb.Average_Speed_mbps;
+            AveragePass = apb.Average_Pass_of_5_GCSES;
+        }
+
+        public AverageSpeed_AveragePass_County()
+        {
+
+        }
+
+        [DataMember]
+        public int? CountyID { get; set; }
+
+        [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
+        public decimal? AverageSpeed { get; set; }
+
+
+        [DataMember]
+        public decimal? AveragePass { get; set; }
     }
 
 }
