@@ -16,24 +16,7 @@ namespace NetaService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class NetaServices : INetaService
     {
-        public string GetData(int value)
-        {
-            List<BBandPassRate> lstPassRates = new List<BBandPassRate>();
-
-            using (NetaDBEntities neta = new NetaDBEntities())
-            {
-                var myData = from p in neta.view_passrates_by_broadband select p;
-
-                foreach(view_passrates_by_broadband viewItem in myData)
-                {
-                    BBandPassRate bbRate = Utils.CreteBBandPassRateFromDBView(viewItem);
-
-                    lstPassRates.Add(bbRate);
-        }
-            }
-
-            return lstPassRates;
-        }
+    
 
         public List<average_performance_broadband> getAverages()
         {
@@ -191,6 +174,24 @@ namespace NetaService
                 correlation = getCorrelation;
             }
             return correlation;
+        }
+
+        public List<BBandPassRate> MyView()
+        {
+            List<BBandPassRate> lstPassRates = new List<BBandPassRate>();
+
+            using (NetaDBEntities neta = new NetaDBEntities())
+            {
+                var myData = from p in neta.view_passrates_by_broadband select p;
+
+                foreach (view_passrates_by_broadband viewItem in myData)
+                {
+                    BBandPassRate bbRate = Utils.CreteBBandPassRateFromDBView(viewItem);
+
+                    lstPassRates.Add(bbRate);
+                }
+            }
+            return lstPassRates;
         }
     }
 }

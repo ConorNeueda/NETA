@@ -160,13 +160,22 @@
     <None Include="Service References\NetaServices\NetaServices.disco" />
     <None Include="Service References\NetaServices\configuration91.svcinfo" />
     <None Include="Service References\NetaServices\configuration.svcinfo" />
-    <Content Include="Service References\NetaServices\NetaWeb.NetaServices.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\NetaServices\NetaWeb.NetaServices.BBandPassRate.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\NetaServices\NetaWeb.NetaServices.TopBroadbandSpeed.datasource">
+    <None Include="Service References\NetaServices\NetaServices3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\NetaServices\NetaWeb.NetaServices.AuthorityEmployment_Speed.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\NetaServices\NetaWeb.NetaServices.AuthorityPop_SyncSpeed.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\NetaServices\NetaWeb.NetaServices.average_performance_broadband.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\NetaServices\NetaWeb.NetaServices.SpearmansRank.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\NetaServices\Reference.svcmap">
