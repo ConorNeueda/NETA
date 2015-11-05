@@ -17,12 +17,14 @@ namespace NetaWeb
 {
     public partial class _Default : Page
     {
+        //Chart Array variables
         public average_performance_broadband[] allAPBItems;
         public BBandPassRate[] allBBPassRates;
         public AuthorityPop_SyncSpeed[] allAuthoritySpeedItems;
         public AuthorityEmployment_Speed[] allEmploymentSpeedItems;
         public DataTable mergedTables = new DataTable();
 
+        //Correlation instance variables
         private static decimal apbCorrelation;
         private static decimal bbprCorrelation;
         private static decimal apssCorrelation;
@@ -30,6 +32,8 @@ namespace NetaWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Code associated with the csvUpload method. 
+            //When the page is refreshed, the user's uploaded files will be displayed on screen.
             DataTable myTable = new DataTable();
             if (!IsPostBack)
             {
@@ -56,6 +60,7 @@ namespace NetaWeb
             */
         }
 
+        //CREATE MERGED DATA TABLE FROM UPLOADED CSV FILES
         static DataTable GetDataTableFromCsv(string path, bool isFirstRowHeader)
         {
             string header = isFirstRowHeader ? "Yes" : "No";
@@ -78,67 +83,8 @@ namespace NetaWeb
             }
         }
 
-        private void PopulateMap()
-        {
-            StringBuilder populateMap = new StringBuilder();
-
-            populateMap.Append(@"<script type = 'text/javascript'>
-                    google.maps.event.addDomListener(window, 'load', init);
-
-                                    var map;
-                                    function init() {
-
-                                        var locations = [
-                                         ['Title A', 3.180967, 101.715546, 1],
-                                         ['Title B', 3.200848, 101.616669, 2],
-                                         ['Title C', 3.147372, 101.597443, 3],
-                                         ['Title D', 3.19125, 101.710052, 4]
-                                        ];");
-
-            populateMap.Append(@"  var mapOptions = {
-                                            center: new google.maps.LatLng(54.619798, -6.834413),
-                                            zoom: 8,
-                                            zoomControl: true,
-                                            zoomControlOptions: {
-                                                style: google.maps.ZoomControlStyle.DEFAULT,
-                                            },
-                                            disableDoubleClickZoom: true,
-                                            mapTypeControl: true,
-                                            mapTypeControlOptions: {
-                                                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                                            },
-                                            scaleControl: true,
-                                            scrollwheel: true,
-                                            panControl: true,
-                                            streetViewControl: true,
-                                            draggable: true,
-                                            overviewMapControl: true,
-                                            overviewMapControlOptions: {
-                                                opened: false,
-                                            },
-                                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                                            styles: [{ 'featureType': 'water', 'elementType': 'geometry', 'stylers': [{ 'color': '#e9e9e9' }, { 'lightness': 17 }] }, { 'featureType': 'landscape', 'elementType': 'geometry', 'stylers': [{ 'color': '#f5f5f5' }, { 'lightness': 20 }] }, { 'featureType': 'road.highway', 'elementType': 'geometry.fill', 'stylers': [{ 'color': '#ffffff' }, { 'lightness': 17 }] }, { 'featureType': 'road.highway', 'elementType': 'geometry.stroke', 'stylers': [{ 'color': '#ffffff' }, { 'lightness': 29 }, { 'weight': 0.2 }] }, { 'featureType': 'road.arterial', 'elementType': 'geometry', 'stylers': [{ 'color': '#ffffff' }, { 'lightness': 18 }] }, { 'featureType': 'road.local', 'elementType': 'geometry', 'stylers': [{ 'color': '#ffffff' }, { 'lightness': 16 }] }, { 'featureType': 'poi', 'elementType': 'geometry', 'stylers': [{ 'color': '#f5f5f5' }, { 'lightness': 21 }] }, { 'featureType': 'poi.park', 'elementType': 'geometry', 'stylers': [{ 'color': '#dedede' }, { 'lightness': 21 }] }, { 'elementType': 'labels.text.stroke', 'stylers': [{ 'visibility': 'on' }, { 'color': '#ffffff' }, { 'lightness': 16 }] }, { 'elementType': 'labels.text.fill', 'stylers': [{ 'saturation': 36 }, { 'color': '#333333' }, { 'lightness': 40 }] }, { 'elementType': 'labels.icon', 'stylers': [{ 'visibility': 'off' }] }, { 'featureType': 'transit', 'elementType': 'geometry', 'stylers': [{ 'color': '#f2f2f2' }, { 'lightness': 19 }] }, { 'featureType': 'administrative', 'elementType': 'geometry.fill', 'stylers': [{ 'color': '#fefefe' }, { 'lightness': 20 }] }, { 'featureType': 'administrative', 'elementType': 'geometry.stroke', 'stylers': [{ 'color': '#fefefe' }, { 'lightness': 17 }, { 'weight': 1.2 }] }],
-                                        };");
-
-            populateMap.Append(@"    var mapElement = document.getElementById('NI');
-                                        var map = new google.maps.Map(mapElement, mapOptions);
-                                        var marker, i;
-
-                                        for (i = 0; i < locations.length; i++) {
-                                            marker = new google.maps.Marker({
-                                                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                                                map: map
-                                            });
-                                        }
-                                    }");
-
-            mapLit.Text = populateMap.ToString() + "</script>";
-
-
-        }
-
-        //CONVERT TO DATATABLE
-
+        //METHODS FOR CONVERTING ARRAYS TO DATA TABLES
+        //USED IN ORDER TO POPULATE GRAPHS
         static DataTable ConvertToDatatable(BBandPassRate[] list)
         {
             DataTable datatable = new DataTable();
@@ -159,7 +105,7 @@ namespace NetaWeb
             }
 
             return datatable;
-        }
+        }//convertToDT(BBandPassRate)
 
         static DataTable ConvertToDatatable(average_performance_broadband[] list)
         {
@@ -179,7 +125,7 @@ namespace NetaWeb
                 dt.Rows.Add(row);
             }
             return dt;
-        }//convertToDT
+        }//convertToDT(Avg_performance_bband)
 
         static DataTable ConvertToDatatable(AuthorityPop_SyncSpeed[] list)
         {
@@ -200,7 +146,7 @@ namespace NetaWeb
             }
 
             return datatable;
-        }//convertToDT
+        }//convertToDT(AuthorityPop_Speed)
 
         static DataTable ConvertToDatatable(AuthorityEmployment_Speed[] list)
         {
@@ -222,7 +168,7 @@ namespace NetaWeb
             }
 
             return dt;
-        }
+        }//convertToDT(AuthorityEmploymentSpeed)
 
         static DataTable ConvertToDatatable(SpearmansRank[] list)
         {
@@ -244,8 +190,11 @@ namespace NetaWeb
             }
 
             return dt;
-        }
+        }//ConvertToDT(SpearmansRank)
 
+        //METHODS FOR CHART POPULATION
+
+        //Make chart from BBandPassRate items
         public  void MakeChart()
         {
             using (NetaServiceClient proxy = new NetaServiceClient())
@@ -253,8 +202,11 @@ namespace NetaWeb
                 allBBPassRates = proxy.MyView();
             }
 
+            //Create and initialise datatable
             DataTable dt = new DataTable();
             dt = ConvertToDatatable(allBBPassRates);
+
+            //Initialise StringBuilder to hold JavaScript text
             StringBuilder str = new StringBuilder();
 
             str.Append(@"<script type = 'text/javascript'>
@@ -290,12 +242,12 @@ namespace NetaWeb
                 }
             }
 
-
             str.Append("var options = {vAxes: {0: { format: ''},1: { format: '##'}},hAxis: { title: 'Week', format: 'm/d/y'},seriesType: 'bars',series:{ 0:{ type: 'bars', targetAxisIndex: 0 }, 1: { type: 'line', targetAxisIndex: 1}}, };");
 
             str.Append(@"var chart = new google.visualization.ComboChart(document.getElementById('myChart'));  
                          chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
+            //Assign stringbuilder variable to <asp:literal>
             chartLit.Text = str.ToString() + "</script>";
 
         }
@@ -309,9 +261,11 @@ namespace NetaWeb
 
             }
 
+            //Create and initialise datatable
             DataTable dt = new DataTable();
             dt = ConvertToDatatable(allAPBItems);
 
+            //Initialise StringBuilder to hold JavaScript text
             StringBuilder str = new StringBuilder();
 
             str.Append(@"<script type = 'text/javascript'>
@@ -351,6 +305,7 @@ namespace NetaWeb
 
             str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_1')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
+            //Assign stringbuilder variable to <asp:literal>
             //lt.Text = str.ToString() + "</script>";
         }//AvgPerformance_Bband_ByCounty
 
@@ -362,9 +317,11 @@ namespace NetaWeb
                 var serilizer = new System.Web.Script.Serialization.JavaScriptSerializer();
             }
 
+            //Create and initialise datatable
             DataTable dt = new DataTable();
             dt = ConvertToDatatable(allAuthoritySpeedItems);
 
+            //Initialise StringBuilder to hold JavaScript text
             StringBuilder str = new StringBuilder();
 
             str.Append(@"<script type = 'text/javascript'>
@@ -404,6 +361,7 @@ namespace NetaWeb
 
             str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_2')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
+            //Assign stringbuilder variable to <asp:literal>
             authPopSpeed.Text = str.ToString() + "</script>";
         }//AvgPop_SyncSpeed
 
@@ -414,10 +372,11 @@ namespace NetaWeb
                 allEmploymentSpeedItems = proxy.GetAuthorityEmployment_Speed();
                 var serilizer = new System.Web.Script.Serialization.JavaScriptSerializer();
         }
-
+            //Create and initialise datatable
             DataTable dt = new DataTable();
             dt = ConvertToDatatable(allEmploymentSpeedItems);
 
+            //Initialise StringBuilder to hold JavaScript text
             StringBuilder str = new StringBuilder();
 
             str.Append(@"<script type = 'text/javascript'>
@@ -457,6 +416,7 @@ namespace NetaWeb
 
             str.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div_3')); chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
 
+            //Assign stringbuilder variable to <asp:literal>
             authEmpSyncSpeed.Text = str.ToString() + "</script>";
         }
 
@@ -467,7 +427,7 @@ namespace NetaWeb
         }
 
         //GET CORRELATION METHODS
-
+        //EACH IS ASSOCIATED WITH A PARTICULAR GRAPH
         static decimal GetApbCorrelation()
         {
             using (NetaServiceClient proxy = new NetaServiceClient())
@@ -506,6 +466,7 @@ namespace NetaWeb
             return aesCorrelation;
         }
 
+        //METHOD TO ASSIGN EACH CORRELATION LABEL TO A SPEARMAN'S RANK TEST RESULT
         private void BindCorrelationToLabels()
         {
             //APBLabel.Text = GetApbCorrelation().ToString();

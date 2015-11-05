@@ -11,8 +11,23 @@ using NetaDAL;
 
 namespace NetaService
 {
-   
-            public List<average_performance_broadband> getAverages()
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
+    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+    public class NetaServices : INetaService
+    {
+        public string GetData(int value)
+        {
+            List<BBandPassRate> lstPassRates = new List<BBandPassRate>();
+
+            using (NetaDBEntities neta = new NetaDBEntities())
+            {
+                var myData = from p in neta.view_passrates_by_broadband select p;
+
+                foreach(view_passrates_by_broadband viewItem in myData)
+                {
+                    BBandPassRate bbRate = Utils.CreteBBandPassRateFromDBView(viewItem);
+
+        public List<average_performance_broadband> getAverages()
         {
             List<average_performance_broadband> list = new List<average_performance_broadband>();
 
@@ -50,7 +65,7 @@ namespace NetaService
         }
         return lstPassRates;
     }
-    public average_performance_broadband[] getCountyAveragePerformanceArray()
+        public average_performance_broadband[] getCountyAveragePerformanceArray()
         {
             List<average_performance_broadband> list = new List<average_performance_broadband>();
             using (NetaDBEntities db = new NetaDBEntities())
@@ -189,5 +204,7 @@ namespace NetaService
             }
             return correlation;
         }
+
+
     }
 }
