@@ -1,8 +1,11 @@
 ﻿using NetaService;
 using NetaDAL;
 
+//Class to store methods associated with DataContract objects
+//Used to improve code hygiene
 class Utils
 {
+    //Class methods used to assign DataContract object variables to database fields
     public static BBandPassRate CreteBBandPassRateFromDBView(view_passrates_by_broadband view)
     {
         BBandPassRate ret = new BBandPassRate();
