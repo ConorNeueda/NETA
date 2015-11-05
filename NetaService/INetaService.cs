@@ -70,7 +70,7 @@ namespace NetaService
     [DataContract]
     public class AverageSpeed_AveragePass_County
     {
-        public AverageSpeed_AveragePass_County(NetaClassLib.average_performance_broadband apb)
+        public AverageSpeed_AveragePass_County(NetaDAL.average_performance_broadband apb)
         {
             Id = apb.id;
             CountyID = apb.county_id_fk;
