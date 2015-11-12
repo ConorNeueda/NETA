@@ -32,7 +32,7 @@ namespace NetaService
             List<average_performance_broadband> list = new List<average_performance_broadband>();
 
             using (NetaDBEntities db = new NetaDBEntities())
-            {
+            {   //Sould avoid using vars	
                 var data = (from p in db.average_performance_broadband
                             select p);
 
